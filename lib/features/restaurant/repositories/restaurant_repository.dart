@@ -5,7 +5,7 @@ import 'package:on_your_table_waiter/features/restaurant/data_sources/restaurant
 import 'package:on_your_table_waiter/features/restaurant/models/restaurant_model.dart';
 
 final restaurantRepositoryProvider = Provider<RestaurantRepository>((ref) {
-  return RestaurantRepositoryImpl.fromRead(ref.read);
+  return RestaurantRepositoryImpl.fromRead(ref);
 });
 
 abstract class RestaurantRepository {
@@ -15,8 +15,8 @@ abstract class RestaurantRepository {
 class RestaurantRepositoryImpl implements RestaurantRepository {
   RestaurantRepositoryImpl({required this.dataSource});
 
-  factory RestaurantRepositoryImpl.fromRead(Reader read) {
-    return RestaurantRepositoryImpl(dataSource: read(restaurantDataSourceProvider));
+  factory RestaurantRepositoryImpl.fromRead(Ref ref) {
+    return RestaurantRepositoryImpl(dataSource: ref.read(restaurantDataSourceProvider));
   }
 
   final RestaurantDataSource dataSource;

@@ -7,7 +7,7 @@ import 'package:on_your_table_waiter/features/auth/models/auth_model.dart';
 import 'package:on_your_table_waiter/features/user/models/user_model.dart';
 
 final authDatasourceProvider = Provider<AuthDatasource>((ref) {
-  return AuthDatasourceImpl.fromRead(ref.read);
+  return AuthDatasourceImpl.fromRead(ref);
 });
 
 abstract class AuthDatasource {
@@ -20,9 +20,9 @@ abstract class AuthDatasource {
 }
 
 class AuthDatasourceImpl implements AuthDatasource {
-  factory AuthDatasourceImpl.fromRead(Reader read) {
-    final apiHandler = read(apiHandlerProvider);
-    final dbHandler = read(dbHandlerProvider);
+  factory AuthDatasourceImpl.fromRead(Ref ref) {
+    final apiHandler = ref.read(apiHandlerProvider);
+    final dbHandler = ref.read(dbHandlerProvider);
     return AuthDatasourceImpl(apiHandler, dbHandler);
   }
 

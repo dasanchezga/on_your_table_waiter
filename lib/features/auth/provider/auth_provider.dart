@@ -7,21 +7,21 @@ import 'package:on_your_table_waiter/features/user/models/user_model.dart';
 import 'package:on_your_table_waiter/ui/error/error_screen.dart';
 
 final authProvider = StateNotifierProvider<AuthProvider, AuthState>((ref) {
-  return AuthProvider.fromRead(ref.read);
+  return AuthProvider.fromRead(ref);
 });
 
 class AuthProvider extends StateNotifier<AuthState> {
   AuthProvider({
     required this.authRepository,
-    required this.read,
+    required this.ref,
   }) : super(AuthState(user: StateAsync.initial()));
 
-  factory AuthProvider.fromRead(Reader read) {
-    final authRepository = read(authRepositoryProvider);
-    return AuthProvider(read: read, authRepository: authRepository);
+  factory AuthProvider.fromRead(Ref ref) {
+    final authRepository = ref.read(authRepositoryProvider);
+    return AuthProvider(ref: ref, authRepository: authRepository);
   }
 
-  final Reader read;
+  final Ref ref;
   final AuthRepository authRepository;
 
   Future<void> login({required String email, required String password}) async {
@@ -30,11 +30,11 @@ class AuthProvider extends StateNotifier<AuthState> {
     res.fold(
       (l) {
         state = state.copyWith(user: StateAsync.error(l));
-        read(routerProvider).router.push(ErrorScreen.route, extra: {'error': l.message});
+        ref.read(routerProvider).router.push(ErrorScreen.route, extra: {'error': l.message});
       },
       (r) {
         state = state.copyWith(user: StateAsync.success(r.user));
-        read(routerProvider).router.pop();
+        ref.read(routerProvider).router.pop();
       },
     );
   }

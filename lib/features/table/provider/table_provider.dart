@@ -8,21 +8,21 @@ import 'package:on_your_table_waiter/ui/on_boarding/on_boarding.dart';
 import 'package:on_your_table_waiter/ui/widgets/snackbar/custom_snackbar.dart';
 
 final tableProvider = StateNotifierProvider<TableProvider, TableState>((ref) {
-  return TableProvider(read: ref.read);
+  return TableProvider(ref: ref);
 });
 
 class TableProvider extends StateNotifier<TableState> {
-  TableProvider({required this.read}) : super(const TableState());
+  TableProvider({required this.ref}) : super(const TableState());
 
-  final Reader read;
+  final Ref ref;
 
   Future<void> onReadTableCode(String code) async {
     final validationError = TextFormValidator.tableCodeValidator(code);
     if (validationError != null) {
-      CustomSnackbar.showSnackBar(read(routerProvider).context, validationError);
+      CustomSnackbar.showSnackBar(ref.read(routerProvider).context, validationError);
       return;
     }
-    GoRouter.of(read(routerProvider).context).go('${IndexMenuScreen.route}?tableId=$code');
+    GoRouter.of(ref.read(routerProvider).context).go('${IndexMenuScreen.route}?tableId=$code');
   }
 
   void onClearTableCode() {
@@ -32,8 +32,8 @@ class TableProvider extends StateNotifier<TableState> {
   void onSetTableCode(String code) {
     final validationError = TextFormValidator.tableCodeValidator(code);
     if (validationError != null) {
-      GoRouter.of(read(routerProvider).context).go(OnBoarding.route);
-      CustomSnackbar.showSnackBar(read(routerProvider).context, validationError);
+      GoRouter.of(ref.read(routerProvider).context).go(OnBoarding.route);
+      CustomSnackbar.showSnackBar(ref.read(routerProvider).context, validationError);
       return;
     }
     state = state.copyWith(tableCode: code);
