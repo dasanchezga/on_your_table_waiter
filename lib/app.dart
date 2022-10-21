@@ -2,20 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:on_your_table_waiter/core/router/router.dart';
 import 'package:on_your_table_waiter/core/theme/theme.dart';
-import 'package:on_your_table_waiter/ui/on_boarding/on_boarding.dart';
+import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 
-class MyApp extends ConsumerWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
+  ConsumerState<MyApp> createState() => _MyAppState();
+  }
+  class _MyAppState extends ConsumerState<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => ref.read(authProvider.notifier).getUserByToken());
+  }
+  @override
+  Widget build(BuildContext context) {
+    final routerProv = ref.read(routerProvider);
+    return MaterialApp.router(
       title: 'Restaurants',
-      onGenerateRoute: ref.read(routerProvider).onGenerateRoute,
+      routeInformationProvider: routerProv.goRouter.routeInformationProvider,
+      routeInformationParser: routerProv.goRouter.routeInformationParser,
+      routerDelegate: routerProv.goRouter.routerDelegate,
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.myTheme(),
-      initialRoute: OnBoarding.route,
-      navigatorKey: ref.read(routerProvider).navigatorKey,
     );
   }
 }

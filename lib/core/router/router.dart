@@ -16,6 +16,8 @@ final routerProvider = Provider<CustomRouter>((ref) {
 class CustomRouter {
   CustomRouter();
 
+  get onGenerateRoute => null;
+
   static String atributeErrorMessage(String atribute) {
     return 'Es necesario el parametro $atribute';
   }
