@@ -4,9 +4,8 @@ import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:on_your_table_waiter/core/constants/lotti_assets.dart';
-import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
-import 'package:on_your_table_waiter/ui/table/table_qr_reader_screen.dart';
-import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/table_code_sheet.dart';
+import 'package:on_your_table_waiter/ui/auth/login_screen.dart';
+import 'package:on_your_table_waiter/ui/auth/register_screen.dart';
 import 'package:on_your_table_waiter/ui/widgets/divider.dart';
 import 'package:on_your_table_waiter/ui/widgets/buttons/custom_elevated_button.dart';
 
@@ -22,11 +21,11 @@ class OnBoarding extends ConsumerWidget {
       body: SafeArea(
         child: Column(
           children: [
-            //Lottie.asset(
-              //LottieAssets.food,
-              //width: size.width,
-              //height: size.height * 0.44,
-            //),
+            Lottie.asset(
+              LottieAssets.food,
+              width: size.width,
+              height: size.height * 0.44,
+            ),
             const CustomDivider(),
             AnimatedTextKit(
               totalRepeatCount: 1,
@@ -51,25 +50,23 @@ class OnBoarding extends ConsumerWidget {
             ),
             const Spacer(),
             CustomElevatedButton(
-              onPressed: () => handleOnScan(context),
+              onPressed: () => handleOnLog(context),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: const [
-                  Icon(Icons.qr_code_2_outlined),
                   SizedBox(width: 8),
-                  Text('Escanear codigo QR'),
+                  Text('Ingresar'),
                 ],
               ),
             ),
             const SizedBox(height: 10),
             TextButton(
-              onPressed: () => handleOnWriteCode(context, ref),
+              onPressed: () => handleOnRes(context),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: const [
-                  Icon(Icons.text_snippet_outlined),
                   SizedBox(width: 8),
-                  Text('Ingresar codigo manual'),
+                  Text('Registrarse'),
                 ],
               ),
             ),
@@ -80,12 +77,6 @@ class OnBoarding extends ConsumerWidget {
     );
   }
 
-  void handleOnScan(BuildContext context) => GoRouter.of(context).push(TableQrReaderScreen.route);
-
-  void handleOnWriteCode(BuildContext context, WidgetRef ref) {
-    TableCodeBottomSheet.showManualCodeSheet(
-      context: context,
-      onAccept: ref.read(tableProvider.notifier).onReadTableCode,
-    );
-  }
+  void handleOnLog(BuildContext context) => GoRouter.of(context).push(LoginScreen.route);
+  void handleOnRes(BuildContext context) => GoRouter.of(context).push(RegisterScreen.route);
 }
