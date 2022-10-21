@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:on_your_table_waiter/core/constants/lotti_assets.dart';
 import 'package:on_your_table_waiter/core/validators/text_form_validator.dart';
 import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
+import 'package:on_your_table_waiter/ui/auth/register_screen.dart';
 import 'package:on_your_table_waiter/ui/widgets/backgrounds/animated_background.dart';
 import 'package:on_your_table_waiter/ui/widgets/custom_text_field.dart';
 import '../widgets/buttons/custom_elevated_button.dart';
@@ -103,7 +104,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           ),
           const SizedBox(height: 10),
           TextButton(
-            onPressed: () {},
+            onPressed: () => GoRouter.of(context).push(RegisterScreen.route),
             child: const Text('O regístrate ahora'),
           )
         ],
