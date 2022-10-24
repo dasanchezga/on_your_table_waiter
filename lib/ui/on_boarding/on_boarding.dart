@@ -44,7 +44,7 @@ class OnBoarding extends ConsumerWidget {
             const Padding(
               padding: EdgeInsets.all(20),
               child: Text(
-                'Escanea o ingresa el codigo QR de tu mesa para comenzar tu experiencia.',
+                'Bienvenido a la aplicación para meseros.',
                 style: TextStyle(color: Colors.black87),
               ),
             ),
