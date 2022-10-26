@@ -6,7 +6,9 @@ import 'package:on_your_table_waiter/features/restaurant/provider/restaurant_pro
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
 import 'package:on_your_table_waiter/ui/menu/help_menu_screen.dart';
 import 'package:on_your_table_waiter/ui/menu/menu_screen.dart';
+import 'package:on_your_table_waiter/ui/orders/orders_screen.dart';
 import 'package:on_your_table_waiter/ui/menu/table_menu_screen.dart';
+import 'package:on_your_table_waiter/ui/orders/tables_screen.dart';
 import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/not_authenticated_bottom_sheet.dart';
 
 class IndexOrdersScreen extends ConsumerStatefulWidget {
@@ -45,7 +47,7 @@ class _IndexOrdersScreenState extends ConsumerState<IndexOrdersScreen> {
       ),
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 150),
-        child: const [MenuScreen(),MenuScreen(),MenuScreen()][selectedIndex],
+        child: const [TablesScreen(),MenuScreen(),OrdersScreen()][selectedIndex],
       ),
     );
   }
