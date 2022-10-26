@@ -4,10 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:on_your_table_waiter/ui/Product/product_detail.dart';
 import 'package:on_your_table_waiter/ui/auth/login_screen.dart';
 import 'package:on_your_table_waiter/ui/error/error_screen.dart';
-import 'package:on_your_table_waiter/ui/menu/index_menu_screen.dart';
 import 'package:on_your_table_waiter/ui/on_boarding/on_boarding.dart';
 import 'package:on_your_table_waiter/ui/auth/register_screen.dart';
 import 'package:on_your_table_waiter/ui/table/table_qr_reader_screen.dart';
+
+import '../../ui/orders/index_orders_screen.dart';
 
 final routerProvider = Provider<CustomRouter>((ref) {
   return CustomRouter();
@@ -40,13 +41,8 @@ class CustomRouter {
           builder: (context, state) => const TableQrReaderScreen(),
         ),
         GoRoute(
-          path: IndexMenuScreen.route,
-          builder: (context, state) {
-            final tableId = state.queryParams['tableId'];
-            return tableId == null
-                ? ErrorScreen(error: atributeErrorMessage('tableId'))
-                : IndexMenuScreen(tableId: tableId);
-          },
+          path: IndexOrdersScreen.route,
+          builder: (context, state) => const IndexOrdersScreen(),
         ),
         GoRoute(path: RegisterScreen.route, builder: (context, state) => const RegisterScreen()),
         GoRoute(
