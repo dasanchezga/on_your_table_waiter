@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:on_your_table_waiter/core/validators/text_form_validator.dart';
 import '../widgets/backgrounds/animated_background.dart';
 import '../widgets/custom_text_field.dart';
-import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 import '../widgets/buttons/custom_elevated_button.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,8 +23,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return AnimatedBackground(
       child: ListView(
         padding: const EdgeInsets.all(10),
-        children: [
+          children: [
           const SizedBox(height: 10),
+          Row(
+            children: [
+              IconButton(
+                onPressed: GoRouter.of(context).pop,
+                icon: const Icon(Icons.arrow_back),
+              ),
+            ],
+          ),
+          //const SizedBox(height: 10),
           const Text(
             'Regístrate',
             textAlign: TextAlign.center,
