@@ -16,6 +16,25 @@ class IndexOrdersScreen extends ConsumerStatefulWidget {
 
 class _IndexOrdersScreenState extends ConsumerState<IndexOrdersScreen> {
   int selectedIndex = 0;
+  late List<bool> _selected;
+  bool isSelectionMode = false;
+
+  @override
+  void initState(){
+    super.initState();
+    initializeSelection();
+  }
+
+  void initializeSelection(){
+    _selected = List<bool>.generate(10, (_) => false);
+  }
+
+  @override
+  void dispose(){
+    _selected.clear();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,14 +53,22 @@ class _IndexOrdersScreenState extends ConsumerState<IndexOrdersScreen> {
             label: 'Menu',
           ),
           NavigationDestination(
-            icon: Icon(Icons.support_agent_rounded),
+            icon: Icon(Icons.notification_important),
             label: 'Pedidos',
           ),
         ],
       ),
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 150),
-        child: const [TablesScreen(),MenuScreen(),OrdersScreen()][selectedIndex],
+        child:  [TablesScreen(
+          isSelectionMode: isSelectionMode,
+          selectedList: _selected,
+          onSelectionChange: (bool x){
+            setState(() {
+              isSelectionMode = x;
+            });
+          },
+        ),const MenuScreen(),const OrdersScreen()][selectedIndex],
       ),
     );
   }

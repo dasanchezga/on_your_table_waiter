@@ -24,7 +24,7 @@ class CustomRouter {
   }
 
   final goRouter = GoRouter(
-    initialLocation: OnBoarding.route,
+    initialLocation: IndexOrdersScreen.route,
     errorBuilder: (context, state) {
       if (state.error == null) {
         return const ErrorScreen();
