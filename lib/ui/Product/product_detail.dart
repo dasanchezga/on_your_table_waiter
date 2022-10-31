@@ -1,206 +1,268 @@
+// ignore_for_file: avoid_function_literals_in_foreach_calls
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:on_your_table_waiter/core/utils/currency_formatter.dart';
+import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
+import 'package:on_your_table_waiter/features/product/models/product_model.dart';
+import 'package:on_your_table_waiter/features/product/provider/product_provider.dart';
+import 'package:on_your_table_waiter/features/product/topping_option/topping_options_checkbox.dart';
+import 'package:on_your_table_waiter/ui/error/error_screen.dart';
+import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/base_bottom_sheet.dart';
+import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/not_authenticated_bottom_sheet.dart';
+import 'package:on_your_table_waiter/ui/widgets/custom_text_field.dart';
 import '../widgets/buttons/custom_elevated_button.dart';
 
-class ProductDetail extends StatefulWidget {
-  const ProductDetail({super.key});
+class ProductDetail extends ConsumerStatefulWidget {
+  const ProductDetail({
+    super.key,
+    required this.productId,
+    this.order,
+  });
   static const route = '/product-detail';
 
-
+  final String productId;
+  final ProductDetailModel? order;
 
   @override
-  State<ProductDetail> createState() => _ProductDetailState();
+  ConsumerState<ProductDetail> createState() => _ProductDetailState();
 }
 
-class _ProductDetailState extends State<ProductDetail> {
-  late int foodQuantity = 0, mainProductPrice = 13500, toppingsPrices = 600, total = 0;
-  bool isSelectedA = false, isSelectedB = false;
-  final _formKey = GlobalKey();
+class _ProductDetailState extends ConsumerState<ProductDetail> {
+  bool isExpanded = true;
+  final _scrollController = ScrollController();
+  final _notesController = TextEditingController();
+  List<Topping> toppings = [];
+  num total = 0;
+  num totalWithToppings = 0;
+  bool isCreated = false;
+
+  void scollListener() {
+    if (_scrollController.offset >= 100) {
+      setState(() {
+        isExpanded = false;
+      });
+    } else {
+      setState(() {
+        isExpanded = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _notesController.text = widget.order?.note ?? '';
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(productProvider.notifier).productDetail(widget.productId);
+    });
+    _scrollController.addListener(scollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(scollListener);
+    _scrollController.dispose();
+    ref.invalidate(productProvider);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final productState = ref.watch(productProvider);
     return Scaffold(
-      body: ListView(
-        children: [
-          const Image(
-            image: NetworkImage(
-              'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/NCI_Visuals_Food_Hamburger.jpg/640px-NCI_Visuals_Food_Hamburger.jpg',
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Product name',
-                  style: TextStyle(
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  '${String.fromCharCode(036)} $mainProductPrice',
-                  style: const TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  '[Descripción] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
-                ),
-                const SizedBox(height: 30),
-                Center(
-                  child: Container(
-                    width: 100,
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    margin: const EdgeInsets.all(5.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        width: 1,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        GestureDetector(
-                          onTap: removeFromFoodQuantity,
-                          child: const Icon(Icons.remove_sharp, size: 20),
-                        ),
-                        Text(
-                          '$foodQuantity',
-                        ),
-                        GestureDetector(
-                          onTap: addToFoodQuantity,
-                          child: const Icon(Icons.add, size: 20),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  'Acompañamiento',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  height: 100,
-                  child: ListView(
-                    padding: const EdgeInsets.all(10),
+      body: productState.productDetail.on(
+        onError: (e) => ErrorScreen(error: e.message),
+        onLoading: () => const Center(child: CircularProgressIndicator()),
+        onInitial: () => const Center(child: CircularProgressIndicator()),
+        onData: (data) {
+          onCreateWidget(data);
+          return NestedScrollView(
+            controller: _scrollController,
+            headerSliverBuilder: (context, innerBoxIsScrolled) => [
+              SliverAppBar(
+                floating: false,
+                snap: false,
+                centerTitle: true,
+                systemOverlayStyle: SystemUiOverlayStyle.light,
+                pinned: true,
+                expandedHeight: 160,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Stack(
                     children: [
-                      CheckboxListTile(
-                        title: Text.rich(
-                          TextSpan(
-                            text: 'Papas fritas\n',
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: '${String.fromCharCode(036)} $toppingsPrices',
-                                style: const TextStyle(fontSize: 20.0),
-                              ),
-                            ],
-                          ),
-                        ),
-                        value: isSelectedA,
-                        onChanged: (bool? newValue) {
-                          setState(() {
-                            if (foodQuantity != 0) {
-                              isSelectedA = newValue!;
-                              calculateTotal();
-                            }
-                          });
-                        },
-                        secondary: ClipRRect(
-                          borderRadius: BorderRadius.circular(12.0),
-                          child: const Image(
-                            height: 40.0,
-                            width: 40.0,
-                            image: NetworkImage(
-                              'https://www.cardamomo.news/__export/1621290930734/sites/debate/img/2021/05/17/papas_fritas_crop1621290739319.jpeg_1753094345.jpeg',
-                            ),
-                          ),
-                        ),
+                      Image.network(
+                        data.imgUrl,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
                       ),
-                      CheckboxListTile(
-                        title: Text.rich(
-                          TextSpan(
-                            text: 'Guacamole\n',
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: '${String.fromCharCode(036)} $toppingsPrices',
-                                style: const TextStyle(fontSize: 20.0),
-                              ),
-                            ],
-                          ),
-                        ),
-                        value: isSelectedB,
-                        onChanged: (bool? newValue) {
-                          setState(() {
-                            if (foodQuantity != 0) {
-                              isSelectedB = newValue!;
-                              calculateTotal();
-                            }
-                          });
-                        },
-                        secondary: ClipRRect(
-                          borderRadius: BorderRadius.circular(12.0),
-                          child: const Image(
-                            height: 40.0,
-                            image: NetworkImage(
-                              'https://www.mylatinatable.com/wp-content/uploads/2018/09/guacamole-foto-heroe-500x500.jpg',
-                            ),
-                          ),
-                        ),
-                      )
+                      Container(color: Colors.black.withOpacity(0.2)),
                     ],
                   ),
                 ),
+                title: isExpanded ? const SizedBox() : Text(data.name),
+              ),
+            ],
+            body: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              children: [
+                const SizedBox(height: 20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      data.name,
+                      style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      '\$ ${CurrencyFormatter.format(data.price)}',
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(data.description),
+                    const SizedBox(height: 20),
+                    const Text(
+                      'Toppings',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    ToppingOptionsCheckbox(
+                      toppings: data.toppings,
+                      onAdd: onAddTopping,
+                      orderedToppings: widget.order?.toppings,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                CustomTextField(
+                  label: 'Comentarios',
+                  hintText: 'Algo que debamos saber como: sin cebolla, sin tomate, etc.',
+                  maxLines: 3,
+                  controller: _notesController,
+                ),
+                const SizedBox(height: 20.0),
+                widget.order == null
+                    ? CustomElevatedButton(
+                        onPressed: _onAddToOrder,
+                        child: Text('Agregar \$ ${CurrencyFormatter.format(totalWithToppings)}'),
+                      )
+                    : Column(
+                        children: [
+                          CustomElevatedButton(
+                            onPressed: _modifyItem,
+                            child: Text(
+                              'Modificar orden \$ ${CurrencyFormatter.format(totalWithToppings)}',
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          TextButton(
+                            onPressed: _showBottomSheet,
+                            child: const Text('Eliminar orden'),
+                          )
+                        ],
+                      ),
+                SizedBox(height: 20.0 + MediaQuery.of(context).padding.bottom),
               ],
             ),
-          ),
-          const SizedBox(
-            height: 20.0,
-          ),
-          CustomElevatedButton(
-            onPressed: () {},
-            child: Text('Hacer pedido (${String.fromCharCode(036)} $total )'),
-          )
-        ],
+          );
+        },
       ),
     );
   }
 
-  void calculateTotal() {
-    total = foodQuantity * mainProductPrice;
-    if (isSelectedA && foodQuantity != 0) {
-      total += toppingsPrices;
-    }
-    if (isSelectedB && foodQuantity != 0) {
-      total += toppingsPrices;
-    }
+  void onCreateWidget(ProductDetailModel data) {
+    if (isCreated) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      total = widget.order?.price ?? data.price;
+      totalWithToppings = widget.order?.totalWithToppings ?? data.price;
+      isCreated = true;
+    });
+  }
+
+  void onAddTopping(List<Topping> toAddTopping) {
+    toppings = toAddTopping;
+    num toppingsValue = 0;
+    toppings.forEach((e) => e.options.forEach((i) => toppingsValue += i.price));
+    totalWithToppings = total + toppingsValue;
     setState(() {});
   }
 
-  void addToFoodQuantity() {
-    foodQuantity++;
-    calculateTotal();
-    setState(() {});
-  }
-
-  void removeFromFoodQuantity() {
-    if (foodQuantity <= 0) {
+  void _onAddToOrder() {
+    final userState = ref.read(authProvider).authModel;
+    if (userState.data == null) {
+      NotAuthenticatedBottomSheet.show(context);
       return;
     }
-    foodQuantity--;
-    calculateTotal();
-    setState(() {});
+    final newProduct = ref.read(productProvider).productDetail.data!.copyWith(
+          note: _notesController.text,
+          toppings: toppings,
+          totalWithToppings: totalWithToppings,
+        );
+
+    //ref.read(productProvider.notifier).addToOrder(newProduct);
+    GoRouter.of(context).pop();
+  }
+
+  void _showBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return BaseBottomSheet(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('¿Estás seguro que deseas elimnar este plato de la orden?'),
+              const SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                onPressed: _deleteItem,
+                child: const Text('Sí'),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                onPressed: Navigator.of(context).pop,
+                child: const Text('No'),
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _deleteItem() {
+    final userState = ref.read(authProvider).authModel;
+    if (userState.data == null) {
+      NotAuthenticatedBottomSheet.show(context);
+      return;
+    }
+    final newProduct = widget.order?.copyWith(
+      note: _notesController.text,
+      toppings: toppings,
+      totalWithToppings: totalWithToppings,
+    );
+    if (newProduct == null) return;
+    //ref.read(productProvider.notifier).deleteItem(newProduct);
+    GoRouter.of(context).pop();
+  }
+
+  void _modifyItem() {
+    final editProduct = widget.order?.copyWith(
+      note: _notesController.text,
+      toppings: toppings,
+      totalWithToppings: totalWithToppings,
+    );
+    if (editProduct == null) return;
+    //ref.read(productProvider.notifier).editItem(editProduct);
+    GoRouter.of(context).pop();
   }
 }

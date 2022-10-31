@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:on_your_table_waiter/core/utils/currency_formatter.dart';
 import 'package:on_your_table_waiter/features/restaurant/models/restaurant_model.dart' as resm;
+import 'package:on_your_table_waiter/ui/Product/product_detail.dart';
 
 class ProductItemCard extends StatelessWidget {
   const ProductItemCard({Key? key, required this.menuItem}) : super(key: key);
@@ -14,7 +17,7 @@ class ProductItemCard extends StatelessWidget {
         vertical: 5,
       ),
       child: ListTile(
-        onTap: () {},
+        onTap: () => GoRouter.of(context).push('${ProductDetail.route}?productId=${menuItem.id}'),
         enabled: menuItem.isAvaliable,
         contentPadding: const EdgeInsets.only(
           right: 5,
@@ -38,7 +41,9 @@ class ProductItemCard extends StatelessWidget {
               ),
             const SizedBox(height: 5),
             Text(
-              menuItem.isAvaliable ? '\$ ${menuItem.price}' : 'NO DISPONIBLE',
+              menuItem.isAvaliable
+                  ? '\$ ${CurrencyFormatter.format(menuItem.price)}'
+                  : 'NO DISPONIBLE',
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 color: menuItem.isAvaliable ? Colors.black : Colors.grey,

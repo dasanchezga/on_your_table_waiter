@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:on_your_table_waiter/features/bill/bill_screen.dart';
 import 'package:on_your_table_waiter/features/bill/individual_pay_screen.dart';
+import 'package:on_your_table_waiter/features/product/models/product_model.dart';
+import 'package:on_your_table_waiter/ui/Product/product_detail.dart';
 import 'package:on_your_table_waiter/ui/auth/login_screen.dart';
 import 'package:on_your_table_waiter/ui/error/error_screen.dart';
 import 'package:on_your_table_waiter/ui/menu/index_menu_screen.dart';
@@ -69,6 +71,18 @@ class CustomRouter {
         GoRoute(
           path: LoginScreen.route,
           builder: (context, state) => const LoginScreen(),
+        ),
+        GoRoute(
+          path: ProductDetail.route,
+          builder: (context, state) {
+            final productId = state.queryParams['productId'];
+            final prodDetail = state.extra as ProductDetailModel?;
+            if (productId == null) {
+              return ErrorScreen(error: atributeErrorMessage('productId'));
+            } else {
+              return ProductDetail(productId: productId, order: prodDetail);
+            }
+          },
         ),
       ];
 
