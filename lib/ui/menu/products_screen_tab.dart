@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:on_your_table_waiter/ui/menu/widgets/help_item_card.dart';
 
-class HelpMenuScreen extends StatelessWidget {
-  const HelpMenuScreen({super.key});
+class ProductsMenuScreen extends StatelessWidget {
+  const ProductsMenuScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

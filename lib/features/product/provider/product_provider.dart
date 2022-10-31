@@ -1,15 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:on_your_table_waiter/core/constants/socket_constants.dart';
 import 'package:on_your_table_waiter/core/external/socket_handler.dart';
 import 'package:on_your_table_waiter/core/wrappers/state_wrapper.dart';
-import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
-import 'package:on_your_table_waiter/features/product/models/product_model.dart';
 import 'package:on_your_table_waiter/features/product/provider/product_state.dart';
 import 'package:on_your_table_waiter/features/product/repositories/product_repositories.dart';
-import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
 import 'package:on_your_table_waiter/ui/error/error_screen.dart';
 import 'package:on_your_table_waiter/core/router/router.dart';
-import 'package:uuid/uuid.dart';
 
 final productProvider = StateNotifierProvider<ProductProvider, ProductState>((ref) {
   return ProductProvider.fromRead(ref);
@@ -52,29 +47,5 @@ class ProductProvider extends StateNotifier<ProductState> {
         state = state.copyWith(productDetail: StateAsync.success(r));
       },
     );
-  }
-
-  Future<void> addToOrder(ProductDetailModel product) async {
-    final productJson = product.toJson();
-    productJson['token'] = ref.read(authProvider).authModel.data?.bearerToken;
-    productJson['tableId'] = ref.read(tableProvider).tableCode;
-    productJson['uuid'] = const Uuid().v4();
-    socketIOHandler.emitMap(SocketConstants.addToOrder, productJson);
-  }
-
-  Future<void> deleteItem(ProductDetailModel product) async {
-    final productDelete = {
-      'token': ref.read(authProvider).authModel.data?.bearerToken,
-      'tableId': ref.read(tableProvider).tableCode,
-      'uuid': product.uuid,
-    };
-    socketIOHandler.emitMap(SocketConstants.deleteItem, productDelete);
-  }
-
-  Future<void> editItem(ProductDetailModel product) async {
-    final productJSON = product.toJson();
-    productJSON['token'] = ref.read(authProvider).authModel.data?.bearerToken;
-    productJSON['tableId'] = ref.read(tableProvider).tableCode;
-    socketIOHandler.emitMap(SocketConstants.editItem, productJSON);
   }
 }

@@ -1,39 +1,53 @@
 import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
-
+import 'package:flutter/material.dart';
 import 'package:on_your_table_waiter/features/product/models/product_model.dart';
 
 enum TableStatus {
-  empty(value: 'empty', translatedValue: 'Vacia'),
+  empty(
+    value: 'empty',
+    translatedValue: 'Vacia',
+    color: Colors.lightGreen,
+  ),
   ordering(
     value: 'ordering',
     translatedValue: 'Ordenando',
     actionButtonLabel: 'Ordenar ahora',
+    color: Colors.white,
   ),
   waitingForFood(
     value: 'waiting for food',
     translatedValue: 'Esperando comida',
+    color: Colors.yellow,
   ),
   confirmOrder(
     value: 'confirm order',
     translatedValue: 'Confirmando orden',
+    color: Colors.orange,
   ),
   eating(
     value: 'eating',
     translatedValue: 'Comiendo',
     actionButtonLabel: 'Pagar ahora',
+    color: Colors.blue,
   ),
   paying(
     value: 'paying',
     translatedValue: 'Pagando',
     actionButtonLabel: 'Ir a pagar',
+    color: Colors.purple,
   );
 
-  const TableStatus({required this.value, required this.translatedValue, this.actionButtonLabel});
+  const TableStatus({
+    required this.value,
+    required this.translatedValue,
+    this.actionButtonLabel,
+    required this.color,
+  });
   final String value;
   final String translatedValue;
   final String? actionButtonLabel;
+  final Color color;
 
   static TableStatus fromString(String? value) {
     return TableStatus.values.firstWhere((e) => e.value == value, orElse: () => TableStatus.empty);

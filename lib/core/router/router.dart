@@ -52,13 +52,8 @@ class CustomRouter {
           builder: (context, state) => const IndividualPayScreen(),
         ),
         GoRoute(
-          path: IndexMenuScreen.route,
-          builder: (context, state) {
-            final tableId = state.queryParams['tableId'];
-            return tableId == null
-                ? ErrorScreen(error: atributeErrorMessage('tableId'))
-                : IndexMenuScreen(tableId: tableId);
-          },
+          path: IndexHomeScreen.route,
+          builder: (context, state) => const IndexHomeScreen(),
         ),
         GoRoute(path: RegisterScreen.route, builder: (context, state) => const RegisterScreen()),
         GoRoute(

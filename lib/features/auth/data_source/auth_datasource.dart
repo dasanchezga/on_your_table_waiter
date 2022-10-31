@@ -4,6 +4,7 @@ import 'package:on_your_table_waiter/core/external/api_handler.dart';
 import 'package:on_your_table_waiter/core/external/db_handler.dart';
 import 'package:on_your_table_waiter/core/logger/logger.dart';
 import 'package:on_your_table_waiter/features/auth/models/auth_model.dart';
+import 'package:on_your_table_waiter/features/auth/models/check_waiter_response.dart';
 import 'package:on_your_table_waiter/features/user/models/user_model.dart';
 
 final authDatasourceProvider = Provider<AuthDatasource>((ref) {
@@ -16,6 +17,7 @@ abstract class AuthDatasource {
   Future<void> logout();
   Future<void> saveToken(String token);
   Future<void> deleteToken();
+  Future<CheckWaiterResponse> checkIfIsWaiter();
   Future<String?> getToken();
   Future<AuthModel> getUserByToken();
 }
@@ -122,6 +124,17 @@ class AuthDatasourceImpl implements AuthDatasource {
       return dbHandler.delete(DbConstants.bearerTokenKey, DbConstants.authBox);
     } catch (e, s) {
       Logger.logError(e.toString(), s);
+    }
+  }
+
+  @override
+  Future<CheckWaiterResponse> checkIfIsWaiter() async {
+    try {
+      final res = await apiHandler.get('/auth/is-waiter');
+      return CheckWaiterResponse.fromMap(res.responseMap!);
+    } catch (e, s) {
+      Logger.logError(e.toString(), s);
+      rethrow;
     }
   }
 }

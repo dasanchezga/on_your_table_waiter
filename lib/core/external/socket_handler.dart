@@ -7,6 +7,7 @@ import 'package:socket_io_client/socket_io_client.dart' as io;
 
 typedef EventHandler<T> = dynamic Function(T data);
 typedef EventHandlerMap = dynamic Function(Map<String, dynamic> data);
+typedef EventHandlerList = dynamic Function(List data);
 
 final socketProvider = Provider<SocketIOHandler>((ref) {
   return SocketIOHandlerImpl();
@@ -16,6 +17,7 @@ abstract class SocketIOHandler {
   Future<void> connect();
   void on(String event, EventHandler callback);
   void onMap(String event, EventHandlerMap callback);
+  void onList(String event, EventHandlerList callback);
   void onConnect(EventHandler callback);
   void onDisconnect(EventHandler callback);
   void emit(String event, String data);
@@ -79,5 +81,16 @@ class SocketIOHandlerImpl implements SocketIOHandler {
   @override
   void onConnect(EventHandler callback) {
     socket!.onConnect((data) => callback(data));
+  }
+
+  @override
+  void onList(String event, EventHandlerList callback) {
+    socket!.on(event, (data) {
+      Logger.log('####### SOCKET ONLIST #######');
+      Logger.log('Receiving $event with data');
+      Logger.log(data.toString());
+      Logger.log('####### END SOCKET ONMAP #######');
+      callback(List.from(data));
+    });
   }
 }

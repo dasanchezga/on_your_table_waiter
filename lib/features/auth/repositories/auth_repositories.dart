@@ -4,6 +4,7 @@ import 'package:on_your_table_waiter/core/external/api_exception.dart';
 import 'package:on_your_table_waiter/core/failure/failure.dart';
 import 'package:on_your_table_waiter/features/auth/data_source/auth_datasource.dart';
 import 'package:on_your_table_waiter/features/auth/models/auth_model.dart';
+import 'package:on_your_table_waiter/features/auth/models/check_waiter_response.dart';
 import 'package:on_your_table_waiter/features/user/models/user_model.dart';
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
@@ -14,6 +15,7 @@ abstract class AuthRepository {
   Future<Either<Failure, AuthModel>> login(String email, String password);
   Future<Failure?> register(User user);
   Future<Failure?> logout();
+  Future<Either<Failure, CheckWaiterResponse>> checkIfIsWaiter();
   Future<Failure?> restorePassword(String email);
   Future<Either<Failure, AuthModel?>> getUserByToken();
 }
@@ -77,6 +79,16 @@ class AuthRepositoryImpl implements AuthRepository {
     } catch (e) {
       await authDatasource.deleteToken();
       return Left(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, CheckWaiterResponse>> checkIfIsWaiter() async {
+    try {
+      final res = await authDatasource.checkIfIsWaiter();
+      return right(res);
+    } catch (e) {
+      return left(Failure(e.toString()));
     }
   }
 }

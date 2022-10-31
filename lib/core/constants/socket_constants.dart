@@ -8,4 +8,8 @@ class SocketConstants {
   static const changeTableStatus = 'table:change-status';
   static const deleteItem = 'order:delete-item';
   static const editItem = 'order:edit-item';
+
+  //WAITER
+  static const joinToRestaurant = 'restaurant:join';
+  static const listenTables = 'restaurant:tables';
 }

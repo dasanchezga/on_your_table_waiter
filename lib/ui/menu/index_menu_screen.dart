@@ -1,76 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 import 'package:on_your_table_waiter/features/restaurant/provider/restaurant_provider.dart';
-import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
-import 'package:on_your_table_waiter/ui/menu/help_menu_screen.dart';
-import 'package:on_your_table_waiter/ui/menu/menu_screen.dart';
-import 'package:on_your_table_waiter/ui/menu/table_menu_screen.dart';
-import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/not_authenticated_bottom_sheet.dart';
+import 'package:on_your_table_waiter/ui/menu/products_screen_tab.dart';
+import 'package:on_your_table_waiter/ui/menu/tables_screen_tab.dart';
+import 'package:on_your_table_waiter/ui/menu/menu_screen_tab.dart';
 
-class IndexMenuScreen extends ConsumerStatefulWidget {
-  const IndexMenuScreen({super.key, required this.tableId});
-
-  final String tableId;
+class IndexHomeScreen extends ConsumerStatefulWidget {
+  const IndexHomeScreen({super.key});
 
   static const route = '/menu';
 
   @override
-  ConsumerState<IndexMenuScreen> createState() => _MenuScreenState();
+  ConsumerState<IndexHomeScreen> createState() => _MenuScreenState();
 }
 
-class _MenuScreenState extends ConsumerState<IndexMenuScreen> {
+class _MenuScreenState extends ConsumerState<IndexHomeScreen> {
   int selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    ref.read(tableProvider.notifier).onSetTableCode(widget.tableId);
-    ref.read(restaurantProvider.notifier).getMenu();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(restaurantProvider.notifier).getMenu();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: NavigationBar(
-        height: 55,
+        height: 60,
         selectedIndex: selectedIndex,
-        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         onDestinationSelected: handleOnNavigate,
         destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.table_bar),
+            label: 'Mesas',
+          ),
           NavigationDestination(
             icon: Icon(FontAwesomeIcons.utensils),
             label: 'Menu',
           ),
           NavigationDestination(
-            icon: Icon(Icons.table_bar_outlined),
-            label: 'Mesa',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.support_agent_rounded),
-            label: 'Ayuda',
+            icon: Icon(FontAwesomeIcons.burger),
+            label: 'Productos',
           ),
         ],
       ),
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 150),
-        child: const [MenuScreen(), TableMenuScreen(), HelpMenuScreen()][selectedIndex],
+        child: const [TablesScreenTab(), MenuScreenTab(), ProductsMenuScreen()][selectedIndex],
       ),
     );
   }
 
-  void handleOnNavigate(int index) {
-    if (index != 1) {
-      setState(() => selectedIndex = index);
-      return;
-    }
-    final userState = ref.read(authProvider).authModel;
-    if (userState.data != null) {
-      setState(() => selectedIndex = index);
-      return;
-    } else {
-      NotAuthenticatedBottomSheet.show(context);
-    }
-  }
+  void handleOnNavigate(int index) => setState(() => selectedIndex = index);
 }

@@ -5,14 +5,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:on_your_table_waiter/features/restaurant/provider/restaurant_provider.dart';
 import 'package:on_your_table_waiter/ui/widgets/cards/product_item_card.dart';
 
-class MenuScreen extends ConsumerStatefulWidget {
-  const MenuScreen({super.key});
+class MenuScreenTab extends ConsumerStatefulWidget {
+  const MenuScreenTab({super.key});
 
   @override
-  ConsumerState<MenuScreen> createState() => _MenuScreenState();
+  ConsumerState<MenuScreenTab> createState() => _MenuScreenTab();
 }
 
-class _MenuScreenState extends ConsumerState<MenuScreen> {
+class _MenuScreenTab extends ConsumerState<MenuScreenTab> {
   int selectedCategoryIndex = 0;
 
   @override

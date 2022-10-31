@@ -23,7 +23,7 @@ class RestaurantDataSourceImpl implements RestaurantDataSource {
   @override
   Future<RestaurantModel> getRestaurant(String tableId) async {
     try {
-      final res = await apiHandler.get('/menu/$tableId');
+      final res = await apiHandler.get('/menu/get-menu/$tableId');
       return RestaurantModel.fromMap(res.responseMap!);
     } catch (e, s) {
       Logger.logError(e.toString(), s);

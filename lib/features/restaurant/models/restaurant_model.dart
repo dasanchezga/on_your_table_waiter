@@ -15,7 +15,7 @@ class RestaurantModel extends Equatable {
       description: map['restaurant']['description'] ?? '',
       imageUrl: map['restaurant']['imageUrl'],
       categories: List<Menu>.from(map['restaurant']['menu']?.map((x) => Menu.fromMap(x))),
-      tableName: map['table']['name'] ?? '',
+      tableName: map['table']?['name'] ?? '',
       logoUrl: map['restaurant']['logoUrl'],
     );
   }

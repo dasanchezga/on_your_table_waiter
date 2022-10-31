@@ -50,12 +50,12 @@ class OnBoarding extends ConsumerWidget {
             ),
             const Spacer(),
             CustomElevatedButton(
-              onPressed: () => handleOnLog(context),
+              onPressed: () => handleOnLogin(context),
               child: const Text('Ingresar'),
             ),
             const SizedBox(height: 10),
             TextButton(
-              onPressed: () => handleOnRes(context),
+              onPressed: () => handleOnRegister(context),
               child: const Text('Registrarse'),
             ),
             const CustomDivider(),
@@ -65,6 +65,6 @@ class OnBoarding extends ConsumerWidget {
     );
   }
 
-  void handleOnLog(BuildContext context) => GoRouter.of(context).push(LoginScreen.route);
-  void handleOnRes(BuildContext context) => GoRouter.of(context).push(RegisterScreen.route);
+  void handleOnLogin(BuildContext context) => GoRouter.of(context).push(LoginScreen.route);
+  void handleOnRegister(BuildContext context) => GoRouter.of(context).push(RegisterScreen.route);
 }
