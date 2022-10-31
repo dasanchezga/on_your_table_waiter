@@ -62,15 +62,20 @@ class _TablesScreenTab extends ConsumerState<TablesScreenTab> {
                         Text('${item.status.translatedValue}...'),
                       ],
                     ),
-                    if (index % 3 == 0)
+                    if (tableState.customerRequests.data?.callingTables.contains(item.id) ?? false)
                       Positioned(
-                        top: 4,
-                        right: 4,
+                        top: 8,
+                        right: 8,
                         child: Container(
                           padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           child: const Icon(
-                            FontAwesomeIcons.solidHand,
+                            FontAwesomeIcons.bell,
                             color: Colors.white,
+                            size: 15,
                           ),
                         ),
                       ),

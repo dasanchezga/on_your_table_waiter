@@ -7,6 +7,7 @@ import 'package:on_your_table_waiter/core/validators/text_form_validator.dart';
 import 'package:on_your_table_waiter/core/wrappers/state_wrapper.dart';
 import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 import 'package:on_your_table_waiter/features/table/models/change_table_status.dart';
+import 'package:on_your_table_waiter/features/table/models/customer_requests_response.dart';
 import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/features/table/models/users_table.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_state.dart';
@@ -35,6 +36,19 @@ class TableProvider extends StateNotifier<TableState> {
       return;
     }
     GoRouter.of(ref.read(routerProvider).context).go('${IndexHomeScreen.route}?tableId=$code');
+  }
+
+  void startListeningSocket() {
+    listenTables();
+    joinToRestaurant();
+    listenCustomerRequests();
+  }
+
+  void listenCustomerRequests() {
+    socketIOHandler.onMap(SocketConstants.customerRequests, (data) {
+      final res = CustomerRequestsResponse.fromMap(data);
+      state = state.copyWith(customerRequests: StateAsync.success(res));
+    });
   }
 
   Future<void> listenTables() async {

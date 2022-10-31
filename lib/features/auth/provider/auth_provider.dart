@@ -128,7 +128,6 @@ class AuthProvider extends StateNotifier<AuthState> {
 
   Future<void> startListeningSocket() async {
     await socketIOHandler.connect();
-    ref.read(tableProvider.notifier).listenTables();
-    ref.read(tableProvider.notifier).joinToRestaurant();
+    ref.read(tableProvider.notifier).startListeningSocket();
   }
 }

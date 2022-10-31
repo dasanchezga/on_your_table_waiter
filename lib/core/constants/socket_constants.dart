@@ -12,4 +12,5 @@ class SocketConstants {
   //WAITER
   static const joinToRestaurant = 'restaurant:join';
   static const listenTables = 'restaurant:tables';
+  static const customerRequests = 'customer_requests';
 }
