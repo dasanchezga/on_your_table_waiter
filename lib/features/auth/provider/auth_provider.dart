@@ -117,6 +117,7 @@ class AuthProvider extends StateNotifier<AuthState> {
         await checkIfIsWaiter();
         startListeningSocket();
         state = state.copyWith(authModel: StateAsync.success(r));
+        ref.read(routerProvider).router.go(IndexHomeScreen.route);
       },
     );
   }
@@ -129,6 +130,5 @@ class AuthProvider extends StateNotifier<AuthState> {
     await socketIOHandler.connect();
     ref.read(tableProvider.notifier).listenTables();
     ref.read(tableProvider.notifier).joinToRestaurant();
-    //ref.read(tableProvider.notifier).listenListOfOrders();
   }
 }

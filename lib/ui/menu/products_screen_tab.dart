@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:on_your_table_waiter/ui/menu/widgets/help_item_card.dart';
 
 class ProductsMenuScreen extends StatelessWidget {
   const ProductsMenuScreen({super.key});
@@ -7,58 +6,31 @@ class ProductsMenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
+      child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              '¿Necesitas ayuda?',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+        children: [
+          const Text(
+            'Productos',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 5),
-            const Text('Selecciona a continuacion el tipo de ayuda que necesitas.'),
-            const SizedBox(height: 15),
-            Expanded(
-              child: ListView(
-                children: [
-                  HelpItemCard(
-                    title: 'Llamar mesero.',
-                    onTap: () {},
-                  ),
-                  HelpItemCard(
-                    title: 'Pedir la cuenta.',
-                    onTap: () {},
-                  ),
-                  HelpItemCard(
-                    title: '¿Cómo ordenar?',
-                    onTap: () {},
-                  ),
-                  HelpItemCard(
-                    title: '¿Cómo pagar?',
-                    onTap: () {},
-                  ),
-                  HelpItemCard(
-                    title: '¿Cómo retirar mi pedido?',
-                    onTap: () {},
-                  ),
-                  HelpItemCard(
-                    title: '¿Cómo cancelar mi pedido?',
-                    onTap: () {},
-                  ),
-                  HelpItemCard(
-                    title: '¿Cómo reclamar mi pedido?',
-                    onTap: () {},
-                  ),
-                  HelpItemCard(
-                    title: '¿Cómo calificar mi pedido?',
-                    onTap: () {},
-                  ),
-                ],
+          ),
+          const SizedBox(height: 20),
+          ...List.generate(
+            10,
+            (index) => Card(
+              child: ListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                horizontalTitleGap: 10,
+                title: Text('Producto $index'),
+                subtitle: Text('Estado: $index'),
+                trailing: const Text('\$ 10.00'),
+                leading: Text('Mesa \n$index'),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

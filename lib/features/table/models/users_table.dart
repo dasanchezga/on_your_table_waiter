@@ -23,19 +23,19 @@ enum TableStatus {
   confirmOrder(
     value: 'confirm order',
     translatedValue: 'Confirmando orden',
-    color: Colors.orange,
+    color: Colors.orangeAccent,
   ),
   eating(
     value: 'eating',
     translatedValue: 'Comiendo',
     actionButtonLabel: 'Pagar ahora',
-    color: Colors.blue,
+    color: Colors.blueAccent,
   ),
   paying(
     value: 'paying',
     translatedValue: 'Pagando',
     actionButtonLabel: 'Ir a pagar',
-    color: Colors.purple,
+    color: Colors.deepPurpleAccent,
   );
 
   const TableStatus({
