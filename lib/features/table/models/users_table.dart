@@ -15,15 +15,15 @@ enum TableStatus {
     actionButtonLabel: 'Ordenar ahora',
     color: Colors.white,
   ),
-  waitingForFood(
-    value: 'waiting for food',
-    translatedValue: 'Esperando comida',
-    color: Colors.yellow,
-  ),
   confirmOrder(
-    value: 'confirm order',
+    value: 'confirm_order',
     translatedValue: 'Confirmando orden',
     color: Colors.orangeAccent,
+  ),
+  orderConfirmed(
+    value: 'order_confirmed',
+    translatedValue: 'Orden confirmada',
+    color: Colors.yellow,
   ),
   eating(
     value: 'eating',
