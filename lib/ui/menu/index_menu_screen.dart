@@ -65,7 +65,7 @@ class _MenuScreenState extends ConsumerState<IndexMenuScreen> {
       setState(() => selectedIndex = index);
       return;
     }
-    final userState = ref.read(authProvider).user;
+    final userState = ref.read(authProvider).authModel;
     if (userState.data != null) {
       setState(() => selectedIndex = index);
       return;

@@ -13,7 +13,9 @@ final authRepositoryProvider = Provider<AuthRepository>((ref) {
 abstract class AuthRepository {
   Future<Either<Failure, AuthModel>> login(String email, String password);
   Future<Failure?> register(User user);
-  Future<Either<Failure, User?>> getUserByToken();
+  Future<Failure?> logout();
+  Future<Failure?> restorePassword(String email);
+  Future<Either<Failure, AuthModel?>> getUserByToken();
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -40,6 +42,11 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Failure?> restorePassword(String email) async {
+    return null;
+  }
+
+  @override
   Future<Failure?> register(User user) async {
     try {
       await authDatasource.register(user);
@@ -50,13 +57,23 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, User?>> getUserByToken() async {
+  Future<Failure?> logout() async {
+    try {
+      await authDatasource.logout();
+      return null;
+    } catch (e) {
+      return Failure(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<Failure, AuthModel?>> getUserByToken() async {
     try {
       final token = await authDatasource.getToken();
       if (token == null) return const Right(null);
       final res = await authDatasource.getUserByToken();
       await authDatasource.saveToken(res.bearerToken);
-      return Right(res.user);
+      return Right(res);
     } catch (e) {
       await authDatasource.deleteToken();
       return Left(Failure(e.toString()));

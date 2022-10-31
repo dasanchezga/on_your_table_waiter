@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.on_your_table_waiter">
+    package="com.nw.on_your_table_waiter">
    <application
         android:label="on_your_table_waiter"
         android:name="${applicationName}"

@@ -76,15 +76,15 @@ class TableMenuScreen extends ConsumerWidget {
                 Expanded(
                   child: ListView(
                     children: [
-                      authProv.user.on(
-                        onData: (user) => ListTile(
+                      authProv.authModel.on(
+                        onData: (authData) => ListTile(
                           leading: const CircleAvatar(
                             backgroundColor: Colors.blueAccent,
                             foregroundColor: Colors.white,
                             child: Icon(Icons.person),
                           ),
                           title: Text(
-                            '${user.firstName} ${user.lastName} (Tu)',
+                            '${authData.user.firstName} ${authData.user.lastName} (Tu)',
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),

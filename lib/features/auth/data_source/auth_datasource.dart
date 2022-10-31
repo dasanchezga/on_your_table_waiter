@@ -13,6 +13,7 @@ final authDatasourceProvider = Provider<AuthDatasource>((ref) {
 abstract class AuthDatasource {
   Future<AuthModel> login(String email, String password);
   Future<void> register(User user);
+  Future<void> logout();
   Future<void> saveToken(String token);
   Future<void> deleteToken();
   Future<String?> getToken();
@@ -46,12 +47,36 @@ class AuthDatasourceImpl implements AuthDatasource {
   }
 
   @override
+  Future<void> logout() async {
+    try {
+      await apiHandler.post(
+        '/auth/logout',
+        {},
+      );
+      await deleteToken();
+      return;
+    } catch (e, s) {
+      Logger.logError(e.toString(), s);
+      rethrow;
+    }
+  }
+
+  @override
   Future<void> register(User user) async {
     try {
       await apiHandler.post(
         '/auth/register',
         user.toMap(),
       );
+      return;
+    } catch (e, s) {
+      Logger.logError(e.toString(), s);
+      rethrow;
+    }
+  }
+
+  Future<void> restorePassword(String email) async {
+    try {
       return;
     } catch (e, s) {
       Logger.logError(e.toString(), s);

@@ -5,6 +5,8 @@ class ProductDetail extends StatefulWidget {
   const ProductDetail({super.key});
   static const route = '/product-detail';
 
+
+
   @override
   State<ProductDetail> createState() => _ProductDetailState();
 }

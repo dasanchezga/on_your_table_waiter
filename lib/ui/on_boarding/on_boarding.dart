@@ -51,24 +51,12 @@ class OnBoarding extends ConsumerWidget {
             const Spacer(),
             CustomElevatedButton(
               onPressed: () => handleOnLog(context),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  SizedBox(width: 8),
-                  Text('Ingresar'),
-                ],
-              ),
+              child: const Text('Ingresar'),
             ),
             const SizedBox(height: 10),
             TextButton(
               onPressed: () => handleOnRes(context),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  SizedBox(width: 8),
-                  Text('Registrarse'),
-                ],
-              ),
+              child: const Text('Registrarse'),
             ),
             const CustomDivider(),
           ],
