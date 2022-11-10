@@ -4,12 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:on_your_table_waiter/features/bill/bill_screen.dart';
 import 'package:on_your_table_waiter/features/bill/individual_pay_screen.dart';
 import 'package:on_your_table_waiter/features/product/models/product_model.dart';
-import 'package:on_your_table_waiter/ui/Product/product_detail.dart';
+import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
+import 'package:on_your_table_waiter/ui/product/product_detail.dart';
 import 'package:on_your_table_waiter/ui/auth/login_screen.dart';
 import 'package:on_your_table_waiter/ui/error/error_screen.dart';
 import 'package:on_your_table_waiter/ui/menu/index_menu_screen.dart';
 import 'package:on_your_table_waiter/ui/on_boarding/on_boarding.dart';
 import 'package:on_your_table_waiter/ui/auth/register_screen.dart';
+import 'package:on_your_table_waiter/ui/table/table_detail_screen.dart';
 import 'package:on_your_table_waiter/ui/table/table_qr_reader_screen.dart';
 
 final routerProvider = Provider<CustomRouter>((ref) {
@@ -43,6 +45,15 @@ class CustomRouter {
             return transactionId == null
                 ? ErrorScreen(error: atributeErrorMessage('transactionId'))
                 : BillScreen(transactionId: transactionId);
+          },
+        ),
+        GoRoute(
+          path: TableDetailScreen.route,
+          builder: (context, state) {
+            final table = state.extra as TableResponse?;
+            return table == null
+                ? ErrorScreen(error: atributeErrorMessage('tableId'))
+                : TableDetailScreen(table: table);
           },
         ),
         GoRoute(
@@ -86,7 +97,7 @@ class CustomRouter {
         ),
       ];
 
-  BuildContext get context => goRouter.navigator!.context;
+  BuildContext get context => goRouter.routeConfiguration.navigatorKey.currentState!.context;
 
   GoRouter get router => goRouter;
 }

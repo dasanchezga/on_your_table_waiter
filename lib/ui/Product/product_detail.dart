@@ -9,6 +9,7 @@ import 'package:on_your_table_waiter/features/product/models/product_model.dart'
 import 'package:on_your_table_waiter/features/product/provider/product_provider.dart';
 import 'package:on_your_table_waiter/features/product/topping_option/topping_options_checkbox.dart';
 import 'package:on_your_table_waiter/ui/error/error_screen.dart';
+import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/add_product_to_user_sheet.dart';
 import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/base_bottom_sheet.dart';
 import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/not_authenticated_bottom_sheet.dart';
 import 'package:on_your_table_waiter/ui/widgets/custom_text_field.dart';
@@ -199,14 +200,13 @@ class _ProductDetailState extends ConsumerState<ProductDetail> {
       NotAuthenticatedBottomSheet.show(context);
       return;
     }
-    final newProduct = ref.read(productProvider).productDetail.data!.copyWith(
-          note: _notesController.text,
-          toppings: toppings,
-          totalWithToppings: totalWithToppings,
-        );
-
+    // final newProduct = ref.read(productProvider).productDetail.data!.copyWith(
+    //       note: _notesController.text,
+    //       toppings: toppings,
+    //       totalWithToppings: totalWithToppings,
+    //     );
     //ref.read(productProvider.notifier).addToOrder(newProduct);
-    GoRouter.of(context).pop();
+    AddOrderToProductSheet.show(context);
   }
 
   void _showBottomSheet() {

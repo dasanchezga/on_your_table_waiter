@@ -9,13 +9,8 @@ class ProductsMenuScreen extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         children: [
-          const Text(
-            'Productos',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          const Text('Productos', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+          const Text('Aca puedes ver la cola de productos con sus estados...'),
           const SizedBox(height: 20),
           ...List.generate(
             10,
@@ -25,8 +20,7 @@ class ProductsMenuScreen extends StatelessWidget {
                 horizontalTitleGap: 10,
                 title: Text('Producto $index'),
                 subtitle: Text('Estado: $index'),
-                trailing: const Text('\$ 10.00'),
-                leading: Text('Mesa \n$index'),
+                trailing: Text('Mesa $index'),
               ),
             ),
           ),
