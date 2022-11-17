@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
 import 'package:on_your_table_waiter/ui/table/table_detail_screen.dart';
+import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/base_bottom_sheet.dart';
+import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/user_info_sheet.dart';
 
 class TablesScreenTab extends ConsumerStatefulWidget {
   const TablesScreenTab({super.key});
@@ -24,6 +26,20 @@ class _TablesScreenTab extends ConsumerState<TablesScreenTab> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           children: [
+            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              IconButton(
+                  onPressed: () {
+                    UserInfoSheet.show(context);
+                  },
+                  icon: const Icon(
+                    Icons.account_circle_rounded,
+                    color: Colors.blue,
+                  )),
+              const Text(
+                'Bienvenido, username',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ]),
             const Text('Mesas', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
             const Text('Aca puedes ver las mesas del restaurante y administrarlas...'),
             const SizedBox(height: 20),

@@ -77,4 +77,8 @@ class TableProvider extends StateNotifier<TableState> {
       ).toMap(),
     );
   }
+
+  Future<void> logout() async {
+    
+  }
 }
