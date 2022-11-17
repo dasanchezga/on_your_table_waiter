@@ -39,21 +39,14 @@ class _TablesScreenTab extends ConsumerState<TablesScreenTab> {
               ),
               itemBuilder: (context, index) {
                 final item = data.tables[index];
-                return InkWell(
+                return Material(
+                  elevation: 2,
+                  shadowColor: Colors.grey.withOpacity(0.3),
+                  color: item.status.color,
                   borderRadius: BorderRadius.circular(15),
-                  onTap: () => GoRouter.of(context).push(TableDetailScreen.route, extra: item),
-                  child: Ink(
-                    decoration: BoxDecoration(
-                      color: item.status.color,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 5,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(15),
+                    onTap: () => GoRouter.of(context).push(TableDetailScreen.route, extra: item),
                     child: Stack(
                       children: [
                         Column(

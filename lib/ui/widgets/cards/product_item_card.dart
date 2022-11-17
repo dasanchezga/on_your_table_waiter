@@ -12,18 +12,11 @@ class ProductItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 5,
-      ),
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: ListTile(
         onTap: () => GoRouter.of(context).push('${ProductDetail.route}?productId=${menuItem.id}'),
         enabled: menuItem.isAvaliable,
-        contentPadding: const EdgeInsets.only(
-          right: 5,
-          top: 10,
-          bottom: 10,
-        ),
+        contentPadding: const EdgeInsets.only(right: 5, left: 5, top: 10, bottom: 10),
         horizontalTitleGap: 10,
         leading: Image.network(
           menuItem.imgUrl,

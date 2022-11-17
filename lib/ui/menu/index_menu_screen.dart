@@ -48,9 +48,9 @@ class _MenuScreenState extends ConsumerState<IndexHomeScreen> {
           ),
         ],
       ),
-      body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 150),
-        child: const [TablesScreenTab(), MenuScreenTab(), ProductsMenuScreen()][selectedIndex],
+      body: IndexedStack(
+        index: selectedIndex,
+        children: const [TablesScreenTab(), MenuScreenTab(), ProductsMenuScreen()],
       ),
     );
   }
