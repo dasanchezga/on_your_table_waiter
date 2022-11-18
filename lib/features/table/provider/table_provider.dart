@@ -77,4 +77,18 @@ class TableProvider extends StateNotifier<TableState> {
       ).toMap(),
     );
   }
+
+  void joinToTable(TableResponse table) {
+    socketIOHandler.on(SocketConstants.watchATable, (data) {
+      print(data);
+    });
+    socketIOHandler.emitMap(SocketConstants.watchTable, {
+      'token': ref.read(authProvider).authModel.data?.bearerToken ?? '',
+      'tableId': table.id,
+    });
+  }
+
+  void leaveTable(TableResponse table) {
+    socketIOHandler.emitMap(SocketConstants.leaveTable, {'tableId': table.id});
+  }
 }
