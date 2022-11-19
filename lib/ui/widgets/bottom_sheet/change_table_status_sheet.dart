@@ -52,7 +52,7 @@ class _ChangeTableStatusSheetState extends ConsumerState<ChangeTableStatusSheet>
                   style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
-              IconButton(onPressed: Navigator.of(context).pop, icon: const Icon(Icons.close))
+              IconButton(onPressed: Navigator.of(context).pop, icon: const Icon(Icons.close)),
             ],
           ),
           Text('Estado actual: ${widget.table.status.translatedValue}'),

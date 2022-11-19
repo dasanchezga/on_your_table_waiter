@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
 import 'package:on_your_table_waiter/ui/table/table_detail_screen.dart';
+import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
+import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/user_info_sheet.dart';
 
 class TablesScreenTab extends ConsumerStatefulWidget {
   const TablesScreenTab({super.key});
@@ -15,6 +17,7 @@ class TablesScreenTab extends ConsumerStatefulWidget {
 class _TablesScreenTab extends ConsumerState<TablesScreenTab> {
   @override
   Widget build(BuildContext context) {
+    final authState = ref.read(authProvider);
     final tableState = ref.watch(tableProvider);
     return tableState.tables.on(
       onError: (err) => Center(child: Text(err.message)),
@@ -24,6 +27,27 @@ class _TablesScreenTab extends ConsumerState<TablesScreenTab> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           children: [
+            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              IconButton(
+                  onPressed: () {
+                    UserInfoSheet.show(context);
+                  },
+                  icon: const Icon(
+                    Icons.account_circle_rounded,
+                    color: Colors.blue,
+                  )),
+              authState.authModel.on(
+                onData: (data) => Text(
+                  'Bienvenido, ${data.user.firstName} ${data.user.lastName}',
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                onError: (e) => Center(
+                  child: Text(e.message),
+                ),
+                onInitial: () => const Center(child: CircularProgressIndicator()),
+                onLoading: () => const Center(child: CircularProgressIndicator()),
+              )
+            ]),
             const Text('Mesas', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
             const Text('Aca puedes ver las mesas del restaurante y administrarlas...'),
             const SizedBox(height: 20),
