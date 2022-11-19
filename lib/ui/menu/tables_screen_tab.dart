@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
 import 'package:on_your_table_waiter/ui/table/table_detail_screen.dart';
-import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/base_bottom_sheet.dart';
+import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/user_info_sheet.dart';
 
 class TablesScreenTab extends ConsumerStatefulWidget {
@@ -35,9 +35,9 @@ class _TablesScreenTab extends ConsumerState<TablesScreenTab> {
                     Icons.account_circle_rounded,
                     color: Colors.blue,
                   )),
-              const Text(
-                'Bienvenido, username',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                'Bienvenido, ${ref.watch(authProvider).authModel.data?.user.firstName ?? 'User'}',
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ]),
             const Text('Mesas', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),

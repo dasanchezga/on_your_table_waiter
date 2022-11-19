@@ -11,6 +11,7 @@ import 'package:on_your_table_waiter/features/table/provider/table_provider.dart
 import 'package:on_your_table_waiter/features/user/models/user_model.dart';
 import 'package:on_your_table_waiter/ui/error/error_screen.dart';
 import 'package:on_your_table_waiter/ui/menu/index_menu_screen.dart';
+import 'package:on_your_table_waiter/ui/on_boarding/on_boarding.dart';
 import 'package:on_your_table_waiter/ui/widgets/snackbar/custom_snackbar.dart';
 
 final authProvider = StateNotifierProvider<AuthProvider, AuthState>((ref) {
@@ -92,10 +93,7 @@ class AuthProvider extends StateNotifier<AuthState> {
       return;
     }
     stopListeningSocket();
-    CustomSnackbar.showSnackBar(
-      ref.read(routerProvider).context,
-      'Se ha cerrado sesion exitosamente.',
-    );
+    ref.read(routerProvider).router.push(OnBoarding.route);
     state = AuthState.initial();
   }
 
