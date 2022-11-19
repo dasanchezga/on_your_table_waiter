@@ -12,7 +12,7 @@ import 'package:on_your_table_waiter/features/user/models/user_model.dart';
 import 'package:on_your_table_waiter/ui/error/error_screen.dart';
 import 'package:on_your_table_waiter/ui/menu/index_menu_screen.dart';
 import 'package:on_your_table_waiter/ui/on_boarding/on_boarding.dart';
-import 'package:on_your_table_waiter/ui/widgets/snackbar/custom_snackbar.dart';
+
 
 final authProvider = StateNotifierProvider<AuthProvider, AuthState>((ref) {
   return AuthProvider.fromRead(ref);
@@ -93,7 +93,8 @@ class AuthProvider extends StateNotifier<AuthState> {
       return;
     }
     stopListeningSocket();
-    ref.read(routerProvider).router.push(OnBoarding.route);
+    Navigator.of(ref.read(routerProvider).context).popUntil((route) => route.isFirst);
+    Navigator.of(ref.read(routerProvider).context).pushReplacementNamed(OnBoarding.route);
     state = AuthState.initial();
   }
 
