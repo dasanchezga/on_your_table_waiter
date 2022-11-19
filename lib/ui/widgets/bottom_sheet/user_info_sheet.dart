@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/base_bottom_sheet.dart';
 import 'package:on_your_table_waiter/ui/widgets/buttons/custom_elevated_button.dart';
 import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
-import 'package:lottie/lottie.dart';
-import '../../../core/constants/lotti_assets.dart';
 
 class UserInfoSheet extends ConsumerStatefulWidget {
   const UserInfoSheet({super.key});
