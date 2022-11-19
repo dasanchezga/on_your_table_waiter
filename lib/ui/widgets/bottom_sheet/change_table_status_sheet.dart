@@ -43,7 +43,6 @@ class _ChangeTableStatusSheetState extends ConsumerState<ChangeTableStatusSheet>
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          IconButton(onPressed: Navigator.of(context).pop, icon: const Icon(Icons.close)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -53,6 +52,7 @@ class _ChangeTableStatusSheetState extends ConsumerState<ChangeTableStatusSheet>
                   style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
+              IconButton(onPressed: Navigator.of(context).pop, icon: const Icon(Icons.close)),
             ],
           ),
           Text('Estado actual: ${widget.table.status.translatedValue}'),

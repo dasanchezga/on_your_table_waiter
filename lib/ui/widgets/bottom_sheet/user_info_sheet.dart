@@ -34,18 +34,23 @@ class _UserInfoSheet extends ConsumerState<UserInfoSheet> {
   @override
   Widget build(BuildContext context) {
     final authState = ref.read(authProvider);
-    return authState.authModel.on(
-      onData: (data) => BaseBottomSheet(
-        child: Column(
+    return BaseBottomSheet(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(onPressed: Navigator.of(context).pop, icon: const Icon(Icons.close)),
             Flexible(
-              child: Text(
-                data.user.firstName,
+              child: authState.authModel.on(onData: (data) => Text(
+                '${data.user.firstName} ${data.user.lastName}',
                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
+              onError: (e) => Center(
+                  child: Text(e.message),
+                ),
+              onInitial: () => const Center(child: CircularProgressIndicator()),
+              onLoading: () => const Center(child: CircularProgressIndicator()),
+            ),
             ),
             const SizedBox(
               height: 20,
@@ -57,66 +62,10 @@ class _UserInfoSheet extends ConsumerState<UserInfoSheet> {
             ),
           ],
         ),
-      ),
-      onError: (e) => BaseBottomSheet(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(onPressed: Navigator.of(context).pop, icon: const Icon(Icons.close)),
-            const Flexible(
-              child: Text(
-                'Username',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              height: 25,
-              width: double.infinity,
-              child: CustomElevatedButton(onPressed: onLogout, child: const Text('Cerrar sesión')),
-            ),
-          ],
-        ),
-      ),
-      onLoading: () => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Lottie.asset(LottieAssets.preparingFood, width: 200, height: 200),
-          const SizedBox(width: double.infinity),
-          const Text('Cargando...', style: TextStyle(fontWeight: FontWeight.w500)),
-        ],
-      ),
-      onInitial: () => BaseBottomSheet(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(onPressed: Navigator.of(context).pop, icon: const Icon(Icons.close)),
-            const Flexible(
-              child: Text(
-                'Username',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              height: 25,
-              width: double.infinity,
-              child: CustomElevatedButton(onPressed: onLogout, child: const Text('Cerrar sesión')),
-            ),
-          ],
-        ),
-      ),
-    );
+      );
   }
 
   void onLogout() {
     ref.read(authProvider.notifier).logout();
-    Navigator.of(context).pop();
   }
 }

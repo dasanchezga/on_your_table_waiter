@@ -17,6 +17,7 @@ class TablesScreenTab extends ConsumerStatefulWidget {
 class _TablesScreenTab extends ConsumerState<TablesScreenTab> {
   @override
   Widget build(BuildContext context) {
+    final authState = ref.read(authProvider);
     final tableState = ref.watch(tableProvider);
     return tableState.tables.on(
       onError: (err) => Center(child: Text(err.message)),
@@ -35,10 +36,17 @@ class _TablesScreenTab extends ConsumerState<TablesScreenTab> {
                     Icons.account_circle_rounded,
                     color: Colors.blue,
                   )),
-              Text(
-                'Bienvenido, ${ref.watch(authProvider).authModel.data?.user.firstName ?? 'User'}',
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
+              authState.authModel.on(
+                onData: (data) => Text(
+                  'Bienvenido, ${data.user.firstName} ${data.user.lastName}',
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                onError: (e) => Center(
+                  child: Text(e.message),
+                ),
+                onInitial: () => const Center(child: CircularProgressIndicator()),
+                onLoading: () => const Center(child: CircularProgressIndicator()),
+              )
             ]),
             const Text('Mesas', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
             const Text('Aca puedes ver las mesas del restaurante y administrarlas...'),
