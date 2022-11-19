@@ -14,4 +14,7 @@ class SocketConstants {
   static const joinToRestaurant = 'restaurant:join';
   static const listenTables = 'restaurant:tables';
   static const customerRequests = 'customer_requests';
+  static const watchTable = 'waiter:watch-table';
+  static const watchATable = 'watch-table';
+  static const leaveTable = 'waiter:leave-table';
 }
