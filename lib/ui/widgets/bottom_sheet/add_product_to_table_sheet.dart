@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:on_your_table_waiter/features/orders/models/users_by_table.dart';
-import 'package:on_your_table_waiter/features/orders/provider/orders_provider.dart';
 import 'package:on_your_table_waiter/features/product/models/product_model.dart';
 import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
+import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
+import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/add_product_to_user_sheet.dart';
 import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/base_bottom_sheet.dart';
 import 'package:on_your_table_waiter/ui/widgets/buttons/custom_elevated_button.dart';
 
-class AddOrderToUserSheet extends ConsumerStatefulWidget {
-  const AddOrderToUserSheet({required this.table, required this.product, super.key});
+class AddOrderToTableSheet extends ConsumerStatefulWidget {
+  const AddOrderToTableSheet({ required this.product,super.key});
 
-  final TableResponse table;
   final ProductDetailModel product;
 
-  static void show(BuildContext context, TableResponse table, ProductDetailModel product) {
+  static void show(BuildContext context, ProductDetailModel product) {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -21,32 +20,23 @@ class AddOrderToUserSheet extends ConsumerStatefulWidget {
             BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
       ),
       isScrollControlled: true,
-      builder: (context) => AddOrderToUserSheet(table: table, product: product),
+      builder: (context) =>  AddOrderToTableSheet(product: product),
     );
   }
 
   @override
-  ConsumerState<AddOrderToUserSheet> createState() => _AddOrderToUserState();
+  ConsumerState<AddOrderToTableSheet> createState() => _AddOrderToTableState();
 }
 
-class _AddOrderToUserState extends ConsumerState<AddOrderToUserSheet> {
-  UsersByTable? _selectedUser;
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(ordersProvider.notifier).getUserByTable(widget.table.id);
-    });
-    super.initState();
-  }
+class _AddOrderToTableState extends ConsumerState<AddOrderToTableSheet> {
+  TableResponse? _selectedTable;
 
   @override
   Widget build(BuildContext context) {
-    final ordersState = ref.watch(ordersProvider);
+    final tableState = ref.watch(tableProvider);
     return BaseBottomSheet(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 40),
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,19 +51,19 @@ class _AddOrderToUserState extends ConsumerState<AddOrderToUserSheet> {
             ],
           ),
           const SizedBox(height: 10),
-          const Text('Selecciona el usuario al cual se agregue el producto:'),
-          ordersState.usersByTable.on(
+          const Text('Selecciona la mesa al cual se agregue el producto:'),
+          tableState.tables.on(
             onError: (error) => Text(error.toString()),
             onLoading: () => const Center(child: CircularProgressIndicator()),
-            onInitial: () => const Center(child: CircularProgressIndicator()),
+            onInitial: () => const SizedBox.shrink(),
             onData: (data) => Column(
-              children: data
+              children: data.tables
                   .map(
-                    (e) => RadioListTile<UsersByTable>(
+                    (e) => RadioListTile<TableResponse>(
                       value: e,
-                      groupValue: _selectedUser,
-                      onChanged: (v) => setState(() => _selectedUser = v),
-                      title: Text('Usuario: ${e.fullName}'),
+                      groupValue: _selectedTable,
+                      onChanged: (v) => setState(() => _selectedTable = v),
+                      title: Text('Mesa: ${e.name}'),
                       contentPadding: EdgeInsets.zero,
                     ),
                   )
@@ -84,7 +74,7 @@ class _AddOrderToUserState extends ConsumerState<AddOrderToUserSheet> {
             width: double.infinity,
             child: CustomElevatedButton(
               onPressed: onAddProductToUser,
-              child: const Text('Agregar producto'),
+              child: const Text('Seleccionar usuario'),
             ),
           ),
         ],
@@ -93,8 +83,8 @@ class _AddOrderToUserState extends ConsumerState<AddOrderToUserSheet> {
   }
 
   void onAddProductToUser() {
-    if (_selectedUser == null) return;
-    Navigator.of(context).popUntil((route) => route.isFirst);
-    ref.read(ordersProvider.notifier).addProductToUser(widget.table,_selectedUser, widget.product);
+    if (_selectedTable == null) return;
+    Navigator.of(context).pop();
+    AddOrderToUserSheet.show(context, _selectedTable!, widget.product);
   }
 }

@@ -10,6 +10,7 @@ class SocketConstants {
   static const editItem = 'order:edit-item';
 
   //WAITER
+  static const addToOrderToUser = 'waiter:add-item-to-table';
   static const joinToRestaurant = 'restaurant:join';
   static const listenTables = 'restaurant:tables';
   static const customerRequests = 'customer_requests';

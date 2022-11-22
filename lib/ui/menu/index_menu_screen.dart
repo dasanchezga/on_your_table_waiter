@@ -44,7 +44,7 @@ class _MenuScreenState extends ConsumerState<IndexHomeScreen> {
           ),
           NavigationDestination(
             icon: Icon(FontAwesomeIcons.burger),
-            label: 'Productos',
+            label: 'Ordenes',
           ),
         ],
       ),

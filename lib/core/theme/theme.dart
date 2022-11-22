@@ -14,6 +14,11 @@ class CustomTheme {
           elevation: 2,
         ),
       ),
+      cardTheme: CardTheme(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        color: Colors.white,
+        surfaceTintColor: Colors.white,
+      ),
       listTileTheme: ListTileThemeData(
         tileColor: Colors.white.withOpacity(0.9),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

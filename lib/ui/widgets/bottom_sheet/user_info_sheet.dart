@@ -56,14 +56,12 @@ class _UserInfoSheet extends ConsumerState<UserInfoSheet> {
               IconButton(onPressed: Navigator.of(context).pop, icon: const Icon(Icons.close)),
             ],
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
           SizedBox(
-            height: 25,
             width: double.infinity,
             child: CustomElevatedButton(onPressed: onLogout, child: const Text('Cerrar sesión')),
           ),
+          const SizedBox(height: 20),
         ],
       ),
     );

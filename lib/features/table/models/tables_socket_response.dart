@@ -4,9 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:on_your_table_waiter/features/table/models/users_table.dart';
 
 class TablesSocketResponse extends Equatable {
-  const TablesSocketResponse({
-    required this.tables,
-  });
+  const TablesSocketResponse({required this.tables});
 
   final List<TableResponse> tables;
 

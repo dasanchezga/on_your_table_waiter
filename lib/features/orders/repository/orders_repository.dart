@@ -7,6 +7,7 @@ import 'package:on_your_table_waiter/features/orders/models/order_product_model.
 import 'package:on_your_table_waiter/features/orders/models/orders_model.dart';
 import 'package:on_your_table_waiter/features/orders/models/pay_order_mod.dart';
 import 'package:on_your_table_waiter/features/orders/models/pay_order_response.dart';
+import 'package:on_your_table_waiter/features/orders/models/users_by_table.dart';
 
 final ordersRepositoryProvider = Provider<OrdersRepository>((ref) {
   return OrdersRepositoryImpl.fromRef(ref);
@@ -17,6 +18,7 @@ abstract class OrdersRepository {
   Future<Either<Failure, OrderProduct>> getOrder(String id);
   Future<Either<Failure, PayOrderResponse>> payOrder(PayOrderModel order);
   Future<Either<Failure, OrderCompleteResponse>> getOrderById(String id);
+  Future<Either<Failure, List<UsersByTable>>> getUserByTable(String tableId);
 }
 
 class OrdersRepositoryImpl implements OrdersRepository {
@@ -63,6 +65,16 @@ class OrdersRepositoryImpl implements OrdersRepository {
   Future<Either<Failure, OrderCompleteResponse>> getOrderById(String id) async {
     try {
       final res = await ordersDataSource.getOrderById(id);
+      return Right(res);
+    } catch (e) {
+      return Left(Failure(e.toString()));
+    }
+  }
+  
+  @override
+  Future<Either<Failure, List<UsersByTable>>> getUserByTable(String tableId) async {
+    try {
+      final res = await ordersDataSource.getUserByTable(tableId);
       return Right(res);
     } catch (e) {
       return Left(Failure(e.toString()));

@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:on_your_table_waiter/core/constants/lotti_assets.dart';
 import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
+import 'package:on_your_table_waiter/ui/menu/widgets/table_user_card.dart';
 import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/change_table_status_sheet.dart';
 import 'package:on_your_table_waiter/ui/widgets/buttons/custom_elevated_button.dart';
 
@@ -29,6 +30,7 @@ class _TableDetailScreenState extends ConsumerState<TableDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final tableState = ref.watch(tableProvider);
     return WillPopScope(
       onWillPop: () async {
         ref.read(tableProvider.notifier).leaveTable(widget.table);
@@ -36,62 +38,74 @@ class _TableDetailScreenState extends ConsumerState<TableDetailScreen> {
       },
       child: Scaffold(
         appBar: AppBar(title: Text('Mesa ${widget.table.name}')),
-        body: ListView(
-          padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+        body: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 5,
-                    spreadRadius: 1,
-                  ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  Lottie.asset(
-                    LottieAssets.ordering,
-                    width: 140,
-                  ),
-                  const SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'Estado',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
+            Expanded(
+              child: tableState.tableUsers.on(
+                onData: (data) => ListView(
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 5,
+                            spreadRadius: 1,
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 5),
-                      Text('Ordenando...'),
-                    ],
-                  ),
-                ],
+                      child: Row(
+                        children: [
+                          Lottie.asset(
+                            LottieAssets.ordering,
+                            width: 140,
+                          ),
+                          const SizedBox(width: 10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Estado',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Text('${data.tableStatus?.translatedValue}...'),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    ListView.separated(
+                      separatorBuilder: (context, index) => const Divider(),
+                      shrinkWrap: true,
+                      primary: false,
+                      itemCount: data.users.length,
+                      itemBuilder: (context, index) {
+                        final item = data.users[index];
+                        return TableUserCard(userTable: item, showPrice: true);
+                      },
+                    ),
+                  ], 
+                ),
+                onError: (error) => Center(child: Text(error.message)),
+                onLoading: () => const Center(child: CircularProgressIndicator()),
+                onInitial: () => const Center(child: Text('La mesa esta vacia.')),
               ),
             ),
-            const SizedBox(height: 10),
-            // ListView.separated(
-            //   separatorBuilder: (context, index) => const Divider(),
-            //   shrinkWrap: true,
-            //   primary: false,
-            //   itemCount: tableData.users.length,
-            //   itemBuilder: (context, index) {
-            //     final item = tableData.users[index];
-            //     return TableUserCard(userTable: item, showPrice: true);
-            //   },
-            // ),
             CustomElevatedButton(
               onPressed: onChangeStatus,
               child: const Text('Cambiar estado de la mesa'),
             ),
             TextButton(onPressed: () {}, child: const Text('Dejar de llamar al mesero')),
+            const SizedBox(height: 20),
           ],
         ),
       ),

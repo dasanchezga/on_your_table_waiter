@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:on_your_table_waiter/core/constants/socket_constants.dart';
 import 'package:on_your_table_waiter/core/external/socket_handler.dart';
+import 'package:on_your_table_waiter/core/failure/failure.dart';
+import 'package:on_your_table_waiter/core/logger/logger.dart';
 import 'package:on_your_table_waiter/core/router/router.dart';
 import 'package:on_your_table_waiter/core/validators/text_form_validator.dart';
 import 'package:on_your_table_waiter/core/wrappers/state_wrapper.dart';
@@ -79,8 +81,19 @@ class TableProvider extends StateNotifier<TableState> {
   }
 
   void joinToTable(TableResponse table) {
-    socketIOHandler.on(SocketConstants.watchATable, (data) {
-      print(data);
+    state = state.copyWith(tableUsers: StateAsync.loading());
+    socketIOHandler.on(SocketConstants.listOfOrders, (data) {
+      if ((data['table'] as Map).isEmpty) {
+        state = state.copyWith(
+          tableUsers: StateAsync.error(const Failure('No hay usuarios en la mesa')),
+        );
+        return;
+      }
+      final tableUsers = UsersTable.fromMap(data);
+      Logger.log('################# START listenListOfOrders #################');
+      Logger.log(tableUsers.toString());
+      Logger.log('################# END listenListOfOrders #################');
+      state = state.copyWith(tableUsers: StateAsync.success(tableUsers));
     });
     socketIOHandler.emitMap(SocketConstants.watchTable, {
       'token': ref.read(authProvider).authModel.data?.bearerToken ?? '',
@@ -89,6 +102,7 @@ class TableProvider extends StateNotifier<TableState> {
   }
 
   void leaveTable(TableResponse table) {
+    state = state.copyWith(tableUsers: StateAsync.initial());
     socketIOHandler.emitMap(SocketConstants.leaveTable, {'tableId': table.id});
   }
 }
