@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:on_your_table_waiter/core/utils/currency_formatter.dart';
-import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 import 'package:on_your_table_waiter/features/table/models/users_table.dart';
 import 'package:on_your_table_waiter/ui/Product/product_detail.dart';
 

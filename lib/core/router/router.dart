@@ -12,7 +12,6 @@ import 'package:on_your_table_waiter/ui/menu/index_menu_screen.dart';
 import 'package:on_your_table_waiter/ui/on_boarding/on_boarding.dart';
 import 'package:on_your_table_waiter/ui/auth/register_screen.dart';
 import 'package:on_your_table_waiter/ui/table/table_detail_screen.dart';
-import 'package:on_your_table_waiter/ui/table/table_qr_reader_screen.dart';
 
 final routerProvider = Provider<CustomRouter>((ref) {
   return CustomRouter();
@@ -57,10 +56,6 @@ class CustomRouter {
           },
         ),
         GoRoute(
-          path: TableQrReaderScreen.route,
-          builder: (context, state) => const TableQrReaderScreen(),
-        ),
-        GoRoute(
           path: IndividualPayScreen.route,
           builder: (context, state) => const IndividualPayScreen(),
         ),
@@ -97,7 +92,8 @@ class CustomRouter {
         ),
       ];
 
-  BuildContext get context => goRouter.routeConfiguration.navigatorKey.currentState!.context;
+  BuildContext get context =>
+      goRouter.routeInformationParser.configuration.navigatorKey.currentState!.context;
 
   GoRouter get router => goRouter;
 }
