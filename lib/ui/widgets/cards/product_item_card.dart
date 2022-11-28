@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:on_your_table_waiter/core/utils/currency_formatter.dart';
 import 'package:on_your_table_waiter/features/restaurant/models/restaurant_model.dart' as resm;
-import 'package:on_your_table_waiter/ui/product/product_detail.dart';
+import 'package:on_your_table_waiter/ui/products/product_detail.dart';
 
 class ProductItemCard extends StatelessWidget {
   const ProductItemCard({Key? key, required this.menuItem}) : super(key: key);

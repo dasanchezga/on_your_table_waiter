@@ -10,7 +10,7 @@ import 'package:on_your_table_waiter/ui/error/error_screen.dart';
 import 'package:on_your_table_waiter/ui/menu/index_menu_screen.dart';
 import 'package:on_your_table_waiter/ui/on_boarding/on_boarding.dart';
 import 'package:on_your_table_waiter/ui/auth/register_screen.dart';
-import 'package:on_your_table_waiter/ui/product/product_detail.dart';
+import 'package:on_your_table_waiter/ui/products/product_detail.dart';
 import 'package:on_your_table_waiter/ui/table/table_detail_screen.dart';
 
 final routerProvider = Provider<CustomRouter>((ref) {
