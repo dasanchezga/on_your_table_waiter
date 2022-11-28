@@ -8,7 +8,6 @@ import 'package:on_your_table_waiter/app.dart';
 
 void main() async {
   EquatableConfig.stringify = true;
-  HttpOverrides.global = MyHttpOverrides();
   await Hive.initFlutter();
   runApp(const ProviderScope(child: MyApp()));
 }
