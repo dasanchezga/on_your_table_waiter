@@ -17,4 +17,5 @@ class SocketConstants {
   static const watchTable = 'waiter:watch-table';
   static const watchATable = 'watch-table';
   static const leaveTable = 'waiter:leave-table';
+  static const orderQueue = 'order_queue';
 }

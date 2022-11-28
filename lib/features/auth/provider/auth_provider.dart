@@ -7,12 +7,12 @@ import 'package:on_your_table_waiter/core/router/router.dart';
 import 'package:on_your_table_waiter/core/wrappers/state_wrapper.dart';
 import 'package:on_your_table_waiter/features/auth/provider/auth_state.dart';
 import 'package:on_your_table_waiter/features/auth/repositories/auth_repositories.dart';
+import 'package:on_your_table_waiter/features/orders_queue/provider/orders_queue_provider.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
 import 'package:on_your_table_waiter/features/user/models/user_model.dart';
 import 'package:on_your_table_waiter/ui/error/error_screen.dart';
 import 'package:on_your_table_waiter/ui/menu/index_menu_screen.dart';
 import 'package:on_your_table_waiter/ui/on_boarding/on_boarding.dart';
-
 
 final authProvider = StateNotifierProvider<AuthProvider, AuthState>((ref) {
   return AuthProvider.fromRead(ref);
@@ -128,5 +128,6 @@ class AuthProvider extends StateNotifier<AuthState> {
   Future<void> startListeningSocket() async {
     await socketIOHandler.connect();
     ref.read(tableProvider.notifier).startListeningSocket();
+    ref.read(ordersQueueProvider.notifier).startListeningSocket();
   }
 }

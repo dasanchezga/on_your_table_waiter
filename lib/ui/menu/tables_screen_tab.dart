@@ -84,6 +84,7 @@ class _TablesScreenTab extends ConsumerState<TablesScreenTab> {
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
+                              textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: 5, width: double.infinity),
                             Text('${item.status.translatedValue}...'),

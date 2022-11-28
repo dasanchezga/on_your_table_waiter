@@ -38,11 +38,11 @@ class _TableDetailScreenState extends ConsumerState<TableDetailScreen> {
       },
       child: Scaffold(
         appBar: AppBar(title: Text('Mesa ${widget.table.name}')),
-        body: Column(
-          children: [
-            Expanded(
-              child: tableState.tableUsers.on(
-                onData: (data) => ListView(
+        body: tableState.tableUsers.on(
+          onData: (data) => Column(
+            children: [
+              Expanded(
+                child: ListView(
                   padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
                   children: [
                     Container(
@@ -93,20 +93,25 @@ class _TableDetailScreenState extends ConsumerState<TableDetailScreen> {
                         return TableUserCard(userTable: item, showPrice: true);
                       },
                     ),
-                  ], 
+                  ],
                 ),
-                onError: (error) => Center(child: Text(error.message)),
-                onLoading: () => const Center(child: CircularProgressIndicator()),
-                onInitial: () => const Center(child: Text('La mesa esta vacia.')),
               ),
-            ),
-            CustomElevatedButton(
-              onPressed: onChangeStatus,
-              child: const Text('Cambiar estado de la mesa'),
-            ),
-            TextButton(onPressed: () {}, child: const Text('Dejar de llamar al mesero')),
-            const SizedBox(height: 20),
-          ],
+              CustomElevatedButton(
+                onPressed: onChangeStatus,
+                child: const Text('Cambiar estado de la mesa'),
+              ),
+              if (data.needsWaiter)
+                TextButton(
+                  onPressed: () =>
+                      ref.read(tableProvider.notifier).stopCallingWaiter(widget.table.id),
+                  child: const Text('Dejar de llamar al mesero'),
+                ),
+              const SizedBox(height: 20),
+            ],
+          ),
+          onError: (error) => Center(child: Text(error.message)),
+          onLoading: () => const Center(child: CircularProgressIndicator()),
+          onInitial: () => const Center(child: Text('La mesa esta vacia.')),
         ),
       ),
     );

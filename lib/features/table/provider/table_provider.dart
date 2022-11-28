@@ -7,6 +7,7 @@ import 'package:on_your_table_waiter/core/logger/logger.dart';
 import 'package:on_your_table_waiter/core/router/router.dart';
 import 'package:on_your_table_waiter/core/validators/text_form_validator.dart';
 import 'package:on_your_table_waiter/core/wrappers/state_wrapper.dart';
+import 'package:on_your_table_waiter/features/auth/models/connect_socket.dart';
 import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 import 'package:on_your_table_waiter/features/table/models/change_table_status.dart';
 import 'package:on_your_table_waiter/features/table/models/customer_requests_response.dart';
@@ -99,6 +100,16 @@ class TableProvider extends StateNotifier<TableState> {
       'token': ref.read(authProvider).authModel.data?.bearerToken ?? '',
       'tableId': table.id,
     });
+  }
+
+  Future<void> stopCallingWaiter(String tableId) async {
+    socketIOHandler.emitMap(
+      SocketConstants.stopCallWaiter,
+      ConnectSocket(
+        tableId: tableId,
+        token: ref.read(authProvider).authModel.data?.bearerToken ?? '',
+      ).toMap(),
+    );
   }
 
   void leaveTable(TableResponse table) {
