@@ -50,6 +50,7 @@ class _TablesScreenTab extends ConsumerState<TablesScreenTab> {
                 )
               ],
             ),
+            const SizedBox(height: 10),
             const Text('Mesas', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
             const Text('Aca puedes ver las mesas del restaurante y administrarlas...'),
             const SizedBox(height: 20),
@@ -79,7 +80,7 @@ class _TablesScreenTab extends ConsumerState<TablesScreenTab> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Mesa ${item.name}',
+                              'Mesa: ${item.name}',
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
