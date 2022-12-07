@@ -7,7 +7,7 @@ import 'package:oyt_front_core/logger/logger.dart';
 import 'package:on_your_table_waiter/core/router/router.dart';
 import 'package:oyt_front_core/validators/text_form_validator.dart';
 import 'package:oyt_front_core/wrappers/state_wrapper.dart';
-import 'package:on_your_table_waiter/features/auth/models/connect_socket.dart';
+import 'package:oyt_front_auth/models/connect_socket.dart';
 import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 import 'package:on_your_table_waiter/features/table/models/change_table_status.dart';
 import 'package:on_your_table_waiter/features/table/models/customer_requests_response.dart';

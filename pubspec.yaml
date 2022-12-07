@@ -24,6 +24,8 @@ dependencies:
     path: ./packages/oyt_front_core
   oyt_front_widgets:
     path: ./packages/oyt_front_widgets
+  oyt_front_auth:
+    path: ./packages/oyt_front_auth
   hive_flutter: ^1.1.0
   lottie: ^2.0.0
 

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:oyt_front_auth/models/auth_model.dart';
 import 'package:oyt_front_core/wrappers/state_wrapper.dart';
-import 'package:on_your_table_waiter/features/auth/models/auth_model.dart';
 import 'package:on_your_table_waiter/features/auth/models/check_waiter_response.dart';
 
 class AuthState extends Equatable {

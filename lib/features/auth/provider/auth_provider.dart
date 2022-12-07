@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:oyt_front_auth/models/user_model.dart';
 import 'package:oyt_front_core/external/socket_handler.dart';
 import 'package:on_your_table_waiter/core/router/router.dart';
 import 'package:oyt_front_core/wrappers/state_wrapper.dart';
@@ -9,7 +10,6 @@ import 'package:on_your_table_waiter/features/auth/provider/auth_state.dart';
 import 'package:on_your_table_waiter/features/auth/repositories/auth_repositories.dart';
 import 'package:on_your_table_waiter/features/orders_queue/provider/orders_queue_provider.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
-import 'package:on_your_table_waiter/features/user/models/user_model.dart';
 import 'package:oyt_front_widgets/error/error_screen.dart';
 import 'package:on_your_table_waiter/ui/home/index_menu_screen.dart';
 import 'package:on_your_table_waiter/ui/on_boarding/on_boarding.dart';
@@ -36,7 +36,7 @@ class AuthProvider extends StateNotifier<AuthState> {
   }
 
   final Ref ref;
-  final AuthRepository authRepository;
+  final WaiterAuthRepository authRepository;
   final SocketIOHandler socketIOHandler;
 
   Future<void> login({required String email, required String password}) async {
