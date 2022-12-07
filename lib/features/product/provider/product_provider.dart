@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oyt_front_core/external/socket_handler.dart';
 import 'package:oyt_front_core/wrappers/state_wrapper.dart';
 import 'package:on_your_table_waiter/features/product/provider/product_state.dart';
-import 'package:on_your_table_waiter/features/product/repositories/product_repositories.dart';
+import 'package:oyt_front_product/repositories/product_repositories.dart';
 import 'package:on_your_table_waiter/core/router/router.dart';
 import 'package:oyt_front_widgets/error/error_screen.dart';
 

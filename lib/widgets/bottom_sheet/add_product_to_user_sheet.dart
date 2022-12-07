@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:on_your_table_waiter/features/orders/models/users_by_table.dart';
 import 'package:on_your_table_waiter/features/orders/provider/orders_provider.dart';
-import 'package:on_your_table_waiter/features/product/models/product_model.dart';
+import 'package:oyt_front_product/models/product_model.dart';
 import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
 import 'package:oyt_front_widgets/bottom_sheet/base_bottom_sheet.dart';
 import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
@@ -95,6 +95,6 @@ class _AddOrderToUserState extends ConsumerState<AddOrderToUserSheet> {
   void onAddProductToUser() {
     if (_selectedUser == null) return;
     Navigator.of(context).popUntil((route) => route.isFirst);
-    ref.read(ordersProvider.notifier).addProductToUser(widget.table,_selectedUser, widget.product);
+    ref.read(ordersProvider.notifier).addProductToUser(widget.table, _selectedUser, widget.product);
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oyt_front_core/utils/currency_formatter.dart';
-import 'package:on_your_table_waiter/features/product/models/product_model.dart';
+import 'package:oyt_front_product/models/product_model.dart';
 import 'package:on_your_table_waiter/features/product/provider/product_provider.dart';
 import 'package:on_your_table_waiter/features/product/ui/topping_options_checkbox.dart';
 import 'package:on_your_table_waiter/widgets/bottom_sheet/add_product_to_table_sheet.dart';

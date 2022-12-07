@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:on_your_table_waiter/features/product/models/product_model.dart';
+import 'package:oyt_front_product/models/product_model.dart';
 import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/features/auth/ui/login_screen.dart';
 import 'package:on_your_table_waiter/features/home/index_menu_screen.dart';
