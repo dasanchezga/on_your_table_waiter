@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:on_your_table_waiter/features/bill/bill_screen.dart';
 import 'package:on_your_table_waiter/features/product/models/product_model.dart';
 import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/features/auth/ui/login_screen.dart';
 import 'package:on_your_table_waiter/features/home/index_menu_screen.dart';
-import 'package:on_your_table_waiter/features/on_boarding/on_boarding.dart';
+import 'package:on_your_table_waiter/features/on_boarding/ui/on_boarding.dart';
 import 'package:on_your_table_waiter/features/product/ui/product_detail.dart';
 import 'package:on_your_table_waiter/features/table/ui/table_detail_screen.dart';
 import 'package:oyt_front_widgets/error/error_screen.dart';
@@ -35,15 +34,6 @@ class CustomRouter {
 
   static List<GoRoute> get routes => [
         GoRoute(path: OnBoarding.route, builder: (context, state) => const OnBoarding()),
-        GoRoute(
-          path: BillScreen.route,
-          builder: (context, state) {
-            final transactionId = state.queryParams['transactionId'];
-            return transactionId == null
-                ? ErrorScreen(error: atributeErrorMessage('transactionId'))
-                : BillScreen(transactionId: transactionId);
-          },
-        ),
         GoRoute(
           path: TableDetailScreen.route,
           builder: (context, state) {

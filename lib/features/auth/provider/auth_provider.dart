@@ -12,7 +12,7 @@ import 'package:on_your_table_waiter/features/orders_queue/provider/orders_queue
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
 import 'package:oyt_front_widgets/error/error_screen.dart';
 import 'package:on_your_table_waiter/features/home/index_menu_screen.dart';
-import 'package:on_your_table_waiter/features/on_boarding/on_boarding.dart';
+import 'package:on_your_table_waiter/features/on_boarding/ui/on_boarding.dart';
 
 final authProvider = StateNotifierProvider<AuthProvider, AuthState>((ref) {
   return AuthProvider.fromRead(ref);

@@ -31,26 +31,6 @@ class _OnBoardingState extends ConsumerState<OnBoarding> {
     final authState = ref.read(authProvider);
     return Scaffold(
       body: authState.authModel.on(
-        onError: (e) => SafeArea(
-          child: Column(
-            children: [
-              const OnboardingAnimationTitle(),
-              const Padding(
-                padding: EdgeInsets.all(20),
-                child: Text(
-                  'Bienvenido a la aplicación para meseros.',
-                  style: TextStyle(color: Colors.black87),
-                ),
-              ),
-              const Spacer(),
-              CustomElevatedButton(
-                onPressed: () => handleOnLogin(context),
-                child: const Text('Ingresar'),
-              ),
-              const CustomDivider(),
-            ],
-          ),
-        ),
         onLoading: () => Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -59,27 +39,37 @@ class _OnBoardingState extends ConsumerState<OnBoarding> {
             const Text('Cargando...', style: TextStyle(fontWeight: FontWeight.w500)),
           ],
         ),
-        onInitial: () => SafeArea(
-          child: Column(
-            children: [
-              const OnboardingAnimationTitle(),
-              const Padding(
-                padding: EdgeInsets.all(20),
-                child: Text(
-                  'Bienvenido a la aplicación para meseros.',
-                  style: TextStyle(color: Colors.black87),
-                ),
-              ),
-              const Spacer(),
-              CustomElevatedButton(
-                onPressed: () => handleOnLogin(context),
-                child: const Text('Ingresar'),
-              ),
-              const CustomDivider(),
-            ],
+        onError: (e) => const _OnBoardingBody(),
+        onInitial: () => const _OnBoardingBody(),
+        onData: (data) => const _OnBoardingBody(),
+      ),
+    );
+  }
+}
+
+class _OnBoardingBody extends StatelessWidget {
+  const _OnBoardingBody();
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Column(
+        children: [
+          const OnboardingAnimationTitle(),
+          const Padding(
+            padding: EdgeInsets.all(20),
+            child: Text(
+              'Bienvenido a la aplicación para meseros.',
+              style: TextStyle(color: Colors.black87),
+            ),
           ),
-        ),
-        onData: (data) => const SizedBox(),
+          const Spacer(),
+          CustomElevatedButton(
+            onPressed: () => handleOnLogin(context),
+            child: const Text('Ingresar'),
+          ),
+          const CustomDivider(),
+        ],
       ),
     );
   }
