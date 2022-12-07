@@ -34,6 +34,8 @@ dependencies:
     path: ./packages/oyt_front_order
   oyt_front_orders_queue:
     path: ./packages/oyt_front_orders_queue
+  oyt_front_table:
+    path: ./packages/oyt_front_table
   hive_flutter: ^1.1.0
   lottie: ^2.0.0
 

@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:oyt_front_core/wrappers/state_wrapper.dart';
-import 'package:on_your_table_waiter/features/table/models/customer_requests_response.dart';
-import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
-import 'package:on_your_table_waiter/features/table/models/users_table.dart';
+import 'package:oyt_front_table/models/customer_requests_response.dart';
+import 'package:oyt_front_table/models/tables_socket_response.dart';
+import 'package:oyt_front_table/models/users_table.dart';
 
 class TableState extends Equatable {
   const TableState(

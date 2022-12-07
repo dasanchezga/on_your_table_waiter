@@ -7,7 +7,7 @@ import 'package:oyt_front_order/models/users_by_table.dart';
 import 'package:on_your_table_waiter/features/orders/provider/order_state.dart';
 import 'package:oyt_front_order/repository/orders_repository.dart';
 import 'package:oyt_front_product/models/product_model.dart';
-import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
+import 'package:oyt_front_table/models/tables_socket_response.dart';
 import 'package:uuid/uuid.dart';
 
 final ordersProvider = StateNotifierProvider<OrdersProvider, OrderState>((ref) {

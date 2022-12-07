@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
-import 'package:on_your_table_waiter/features/table/models/users_table.dart';
+import 'package:oyt_front_table/models/tables_socket_response.dart';
+import 'package:oyt_front_table/models/users_table.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
 import 'package:oyt_front_widgets/bottom_sheet/base_bottom_sheet.dart';
 import 'package:oyt_front_widgets/bottom_sheet/bottom_sheet_constants.dart';
