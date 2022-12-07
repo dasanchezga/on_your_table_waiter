@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:on_your_table_waiter/features/orders/models/users_by_table.dart';
+import 'package:oyt_front_order/models/users_by_table.dart';
 import 'package:on_your_table_waiter/features/orders/provider/orders_provider.dart';
 import 'package:oyt_front_product/models/product_model.dart';
 import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
 import 'package:oyt_front_widgets/bottom_sheet/base_bottom_sheet.dart';
+import 'package:oyt_front_widgets/bottom_sheet/bottom_sheet_constants.dart';
 import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
 
 class AddOrderToUserSheet extends ConsumerStatefulWidget {
@@ -13,13 +14,10 @@ class AddOrderToUserSheet extends ConsumerStatefulWidget {
   final TableResponse table;
   final ProductDetailModel product;
 
-  static void show(BuildContext context, TableResponse table, ProductDetailModel product) {
-    showModalBottomSheet(
+  static Future<void> show(BuildContext context, TableResponse table, ProductDetailModel product) {
+    return showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius:
-            BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-      ),
+      shape: BottomSheetConstants.shape,
       isScrollControlled: true,
       builder: (context) => AddOrderToUserSheet(table: table, product: product),
     );

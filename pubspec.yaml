@@ -30,6 +30,8 @@ dependencies:
     path: ./packages/oyt_front_restaurant
   oyt_front_product:
     path: ./packages/oyt_front_product
+  oyt_front_order:
+    path: ./packages/oyt_front_order
   hive_flutter: ^1.1.0
   lottie: ^2.0.0
 

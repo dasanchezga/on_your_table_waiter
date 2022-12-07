@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:oyt_front_core/wrappers/state_wrapper.dart';
-import 'package:on_your_table_waiter/features/orders/models/order_complete_response.dart';
-import 'package:on_your_table_waiter/features/orders/models/orders_model.dart';
-import 'package:on_your_table_waiter/features/orders/models/users_by_table.dart';
+import 'package:oyt_front_order/models/order_complete_response.dart';
+import 'package:oyt_front_order/models/orders_model.dart';
+import 'package:oyt_front_order/models/users_by_table.dart';
 
 class OrderState extends Equatable {
   const OrderState({required this.usersByTable, required this.order, required this.orders});
