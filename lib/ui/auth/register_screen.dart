@@ -116,5 +116,3 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 }
-
-void handleOnRegister() {}
