@@ -107,9 +107,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   void handleOnLogin() {
-    if (!_formKey.currentState!.validate()) {
-      return;
-    }
+    if (!_formKey.currentState!.validate()) return;
     ref.read(authProvider.notifier).login(
           email: _emailController.text,
           password: _passwordController.text,

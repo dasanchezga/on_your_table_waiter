@@ -50,7 +50,7 @@ class AuthProvider extends StateNotifier<AuthState> {
       (r) async {
         await checkIfIsWaiter();
         state = state.copyWith(authModel: StateAsync.success(r));
-        ref.read(routerProvider).router.go(IndexHomeScreen.route);
+        ref.read(routerProvider).router.replace(IndexHomeScreen.route);
         startListeningSocket();
       },
     );
