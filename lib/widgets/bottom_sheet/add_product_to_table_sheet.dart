@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:on_your_table_waiter/features/product/models/product_model.dart';
 import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
-import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/add_product_to_user_sheet.dart';
+import 'package:on_your_table_waiter/widgets/bottom_sheet/add_product_to_user_sheet.dart';
 import 'package:oyt_front_widgets/bottom_sheet/base_bottom_sheet.dart';
 import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
 

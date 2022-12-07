@@ -1,18 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oyt_front_core/constants/socket_constants.dart';
 import 'package:oyt_front_core/external/socket_handler.dart';
-import 'package:on_your_table_waiter/core/router/router.dart';
 import 'package:oyt_front_core/wrappers/state_wrapper.dart';
 import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
-import 'package:on_your_table_waiter/features/bill/bill_screen.dart';
-import 'package:on_your_table_waiter/features/orders/models/pay_order_mod.dart';
 import 'package:on_your_table_waiter/features/orders/models/users_by_table.dart';
 import 'package:on_your_table_waiter/features/orders/provider/order_state.dart';
 import 'package:on_your_table_waiter/features/orders/repository/orders_repository.dart';
 import 'package:on_your_table_waiter/features/product/models/product_model.dart';
 import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
-import 'package:on_your_table_waiter/ui/dialogs/custom_dialogs.dart';
-import 'package:oyt_front_widgets/error/error_screen.dart';
 import 'package:uuid/uuid.dart';
 
 final ordersProvider = StateNotifierProvider<OrdersProvider, OrderState>((ref) {
@@ -45,17 +40,6 @@ class OrdersProvider extends StateNotifier<OrderState> {
       'uuid': const Uuid().v4(),
       'token': ref.read(authProvider).authModel.data?.bearerToken ?? '',
     });
-  }
-
-  Future<void> payOrder(PayOrderModel order) async {
-    ref.read(dialogsProvider).showLoadingDialog('Pagando orden...');
-    final res = await ordersRepository.payOrder(order);
-    ref.read(dialogsProvider).removeDialog();
-    final router = ref.read(routerProvider).router;
-    res.fold(
-      (l) => router.push(ErrorScreen.route, extra: {'error': l.message}),
-      (r) => router.push('${BillScreen.route}?transactionId=${r.id}'),
-    );
   }
 
   Future<void> getOrders() async {

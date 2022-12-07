@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:on_your_table_waiter/features/restaurant/provider/restaurant_provider.dart';
-import 'package:on_your_table_waiter/ui/widgets/cards/product_item_card.dart';
+import 'package:on_your_table_waiter/widgets/cards/product_item_card.dart';
 
 class MenuScreenTab extends ConsumerStatefulWidget {
   const MenuScreenTab({super.key});

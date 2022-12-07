@@ -14,7 +14,7 @@ import 'package:on_your_table_waiter/features/table/models/customer_requests_res
 import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/features/table/models/users_table.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_state.dart';
-import 'package:on_your_table_waiter/ui/home/index_menu_screen.dart';
+import 'package:on_your_table_waiter/features/home/index_menu_screen.dart';
 import 'package:oyt_front_widgets/widgets/snackbar/custom_snackbar.dart';
 
 final tableProvider = StateNotifierProvider<TableProvider, TableState>((ref) {

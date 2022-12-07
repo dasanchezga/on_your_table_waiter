@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
-import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/change_table_status_sheet.dart';
+import 'package:on_your_table_waiter/widgets/bottom_sheet/change_table_status_sheet.dart';
 import 'package:oyt_front_core/constants/lotti_assets.dart';
 import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
-import 'package:on_your_table_waiter/ui/home/widgets/table_user_card.dart';
+import 'package:on_your_table_waiter/features/home/widgets/table_user_card.dart';
 import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
 
 class TableDetailScreen extends ConsumerStatefulWidget {
