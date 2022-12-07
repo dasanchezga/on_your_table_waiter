@@ -12,7 +12,7 @@ import 'package:on_your_table_waiter/features/orders/repository/orders_repositor
 import 'package:on_your_table_waiter/features/product/models/product_model.dart';
 import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/ui/dialogs/custom_dialogs.dart';
-import 'package:on_your_table_waiter/ui/error/error_screen.dart';
+import 'package:oyt_front_widgets/error/error_screen.dart';
 import 'package:uuid/uuid.dart';
 
 final ordersProvider = StateNotifierProvider<OrdersProvider, OrderState>((ref) {

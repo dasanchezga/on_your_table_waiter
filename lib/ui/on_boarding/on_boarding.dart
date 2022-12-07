@@ -6,9 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oyt_front_core/constants/lotti_assets.dart';
 import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 import 'package:on_your_table_waiter/ui/auth/login_screen.dart';
-import 'package:on_your_table_waiter/ui/auth/register_screen.dart';
-import 'package:on_your_table_waiter/ui/widgets/divider.dart';
-import 'package:on_your_table_waiter/ui/widgets/buttons/custom_elevated_button.dart';
+import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
+import 'package:oyt_front_widgets/widgets/divider.dart';
 
 class OnBoarding extends ConsumerStatefulWidget {
   const OnBoarding({Key? key}) : super(key: key);
@@ -69,11 +68,6 @@ class _OnBoardingState extends ConsumerState<OnBoarding> {
                 onPressed: () => handleOnLogin(context),
                 child: const Text('Ingresar'),
               ),
-              const SizedBox(height: 10),
-              TextButton(
-                onPressed: () => handleOnRegister(context),
-                child: const Text('Registrarse'),
-              ),
               const CustomDivider(),
             ],
           ),
@@ -121,11 +115,6 @@ class _OnBoardingState extends ConsumerState<OnBoarding> {
                 onPressed: () => handleOnLogin(context),
                 child: const Text('Ingresar'),
               ),
-              const SizedBox(height: 10),
-              TextButton(
-                onPressed: () => handleOnRegister(context),
-                child: const Text('Registrarse'),
-              ),
               const CustomDivider(),
             ],
           ),
@@ -136,6 +125,4 @@ class _OnBoardingState extends ConsumerState<OnBoarding> {
   }
 
   void handleOnLogin(BuildContext context) => GoRouter.of(context).push(LoginScreen.route);
-
-  void handleOnRegister(BuildContext context) => GoRouter.of(context).push(RegisterScreen.route);
 }

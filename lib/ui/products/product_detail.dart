@@ -4,16 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oyt_front_core/utils/currency_formatter.dart';
-import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 import 'package:on_your_table_waiter/features/product/models/product_model.dart';
 import 'package:on_your_table_waiter/features/product/provider/product_provider.dart';
 import 'package:on_your_table_waiter/features/product/topping_option/topping_options_checkbox.dart';
-import 'package:on_your_table_waiter/ui/error/error_screen.dart';
 import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/add_product_to_table_sheet.dart';
-import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/base_bottom_sheet.dart';
-import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/not_authenticated_bottom_sheet.dart';
-import 'package:on_your_table_waiter/ui/widgets/custom_text_field.dart';
-import '../widgets/buttons/custom_elevated_button.dart';
+import 'package:oyt_front_widgets/bottom_sheet/base_bottom_sheet.dart';
+import 'package:oyt_front_widgets/error/error_screen.dart';
+import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
+import 'package:oyt_front_widgets/widgets/custom_text_field.dart';
 
 class ProductDetail extends ConsumerStatefulWidget {
   const ProductDetail({
@@ -196,11 +194,6 @@ class _ProductDetailState extends ConsumerState<ProductDetail> {
   }
 
   void _onAddToOrder() {
-    final userState = ref.read(authProvider).authModel;
-    if (userState.data == null) {
-      NotAuthenticatedBottomSheet.show(context);
-      return;
-    }
     final newProduct = ref.read(productProvider).productDetail.data!.copyWith(
           note: _notesController.text,
           toppings: toppings,
@@ -210,8 +203,8 @@ class _ProductDetailState extends ConsumerState<ProductDetail> {
     AddOrderToTableSheet.show(context, newProduct);
   }
 
-  void _showBottomSheet() {
-    showModalBottomSheet(
+  Future<void> _showBottomSheet() {
+    return showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
         return BaseBottomSheet(
@@ -241,11 +234,6 @@ class _ProductDetailState extends ConsumerState<ProductDetail> {
   }
 
   void _deleteItem() {
-    final userState = ref.read(authProvider).authModel;
-    if (userState.data == null) {
-      NotAuthenticatedBottomSheet.show(context);
-      return;
-    }
     final newProduct = widget.order?.copyWith(
       note: _notesController.text,
       toppings: toppings,

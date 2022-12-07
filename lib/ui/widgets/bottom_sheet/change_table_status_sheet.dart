@@ -3,21 +3,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/features/table/models/users_table.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
-import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/base_bottom_sheet.dart';
-import 'package:on_your_table_waiter/ui/widgets/buttons/custom_elevated_button.dart';
+import 'package:oyt_front_widgets/bottom_sheet/base_bottom_sheet.dart';
+import 'package:oyt_front_widgets/bottom_sheet/bottom_sheet_constants.dart';
+import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
 
 class ChangeTableStatusSheet extends ConsumerStatefulWidget {
   const ChangeTableStatusSheet({super.key, required this.table});
 
   final TableResponse table;
 
-  static void show(BuildContext context, TableResponse table) {
-    showModalBottomSheet(
+  static Future<void> show(BuildContext context, TableResponse table) {
+    return showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius:
-            BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-      ),
+      shape: BottomSheetConstants.shape,
       isScrollControlled: true,
       builder: (context) => ChangeTableStatusSheet(table: table),
     );

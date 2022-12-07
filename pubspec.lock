@@ -310,6 +310,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  oyt_front_widgets:
+    dependency: "direct main"
+    description:
+      path: "packages/oyt_front_widgets"
+      relative: true
+    source: path
+    version: "0.0.2"
   package_config:
     dependency: transitive
     description:

@@ -15,7 +15,7 @@ import 'package:on_your_table_waiter/features/table/models/tables_socket_respons
 import 'package:on_your_table_waiter/features/table/models/users_table.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_state.dart';
 import 'package:on_your_table_waiter/ui/menu/index_menu_screen.dart';
-import 'package:on_your_table_waiter/ui/widgets/snackbar/custom_snackbar.dart';
+import 'package:oyt_front_widgets/widgets/snackbar/custom_snackbar.dart';
 
 final tableProvider = StateNotifierProvider<TableProvider, TableState>((ref) {
   return TableProvider.fromRead(ref);

@@ -23,6 +23,8 @@ dependencies:
   collection: ^1.16.0
   oyt_front_core:
     path: ./packages/oyt_front_core
+  oyt_front_widgets:
+    path: ./packages/oyt_front_widgets
   hive_flutter: ^1.1.0
   lottie: ^2.0.0
 
@@ -34,6 +36,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-  assets:
-    - assets/lottie/

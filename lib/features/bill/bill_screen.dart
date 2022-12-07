@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oyt_front_core/utils/currency_formatter.dart';
 import 'package:oyt_front_core/utils/formatters.dart';
 import 'package:on_your_table_waiter/features/orders/provider/orders_provider.dart';
-import 'package:on_your_table_waiter/ui/widgets/backgrounds/animated_background.dart';
-import 'package:on_your_table_waiter/ui/widgets/buttons/custom_elevated_button.dart';
+import 'package:oyt_front_widgets/widgets/backgrounds/animated_background.dart';
+import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
 
 class BillScreen extends ConsumerStatefulWidget {
   const BillScreen({required this.transactionId, super.key});

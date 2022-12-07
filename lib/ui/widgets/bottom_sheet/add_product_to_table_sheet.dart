@@ -4,11 +4,11 @@ import 'package:on_your_table_waiter/features/product/models/product_model.dart'
 import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
 import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/add_product_to_user_sheet.dart';
-import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/base_bottom_sheet.dart';
-import 'package:on_your_table_waiter/ui/widgets/buttons/custom_elevated_button.dart';
+import 'package:oyt_front_widgets/bottom_sheet/base_bottom_sheet.dart';
+import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
 
 class AddOrderToTableSheet extends ConsumerStatefulWidget {
-  const AddOrderToTableSheet({ required this.product,super.key});
+  const AddOrderToTableSheet({required this.product, super.key});
 
   final ProductDetailModel product;
 
@@ -20,7 +20,7 @@ class AddOrderToTableSheet extends ConsumerStatefulWidget {
             BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
       ),
       isScrollControlled: true,
-      builder: (context) =>  AddOrderToTableSheet(product: product),
+      builder: (context) => AddOrderToTableSheet(product: product),
     );
   }
 
