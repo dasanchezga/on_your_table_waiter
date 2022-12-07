@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:on_your_table_waiter/core/utils/currency_formatter.dart';
+import 'package:oyt_front_core/utils/currency_formatter.dart';
 import 'package:on_your_table_waiter/features/product/models/product_model.dart';
 
 class ToppingOptionsCheckbox extends StatefulWidget {

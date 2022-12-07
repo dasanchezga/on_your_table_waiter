@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:on_your_table_waiter/core/constants/db_constants.dart';
-import 'package:on_your_table_waiter/core/external/api_handler.dart';
-import 'package:on_your_table_waiter/core/external/db_handler.dart';
-import 'package:on_your_table_waiter/core/logger/logger.dart';
+import 'package:oyt_front_core/constants/db_constants.dart';
+import 'package:oyt_front_core/external/api_handler.dart';
+import 'package:oyt_front_core/external/db_handler.dart';
+import 'package:oyt_front_core/logger/logger.dart';
 import 'package:on_your_table_waiter/features/auth/models/auth_model.dart';
 import 'package:on_your_table_waiter/features/auth/models/check_waiter_response.dart';
 import 'package:on_your_table_waiter/features/user/models/user_model.dart';

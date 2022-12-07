@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:on_your_table_waiter/core/external/api_exception.dart';
-import 'package:on_your_table_waiter/core/failure/failure.dart';
+import 'package:oyt_front_core/external/api_exception.dart';
+import 'package:oyt_front_core/failure/failure.dart';
 import 'package:on_your_table_waiter/features/auth/data_source/auth_datasource.dart';
 import 'package:on_your_table_waiter/features/auth/models/auth_model.dart';
 import 'package:on_your_table_waiter/features/auth/models/check_waiter_response.dart';

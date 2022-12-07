@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:on_your_table_waiter/core/constants/socket_constants.dart';
-import 'package:on_your_table_waiter/core/external/socket_handler.dart';
+import 'package:oyt_front_core/constants/socket_constants.dart';
+import 'package:oyt_front_core/external/socket_handler.dart';
 import 'package:on_your_table_waiter/core/router/router.dart';
-import 'package:on_your_table_waiter/core/wrappers/state_wrapper.dart';
+import 'package:oyt_front_core/wrappers/state_wrapper.dart';
 import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 import 'package:on_your_table_waiter/features/bill/bill_screen.dart';
 import 'package:on_your_table_waiter/features/orders/models/pay_order_mod.dart';

@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:on_your_table_waiter/core/constants/lotti_assets.dart';
+import 'package:oyt_front_core/constants/lotti_assets.dart';
 import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 import 'package:on_your_table_waiter/ui/auth/login_screen.dart';
 import 'package:on_your_table_waiter/ui/auth/register_screen.dart';

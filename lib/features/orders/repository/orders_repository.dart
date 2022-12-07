@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:on_your_table_waiter/core/failure/failure.dart';
+import 'package:oyt_front_core/failure/failure.dart';
 import 'package:on_your_table_waiter/features/orders/data_source/orders_data_source.dart';
 import 'package:on_your_table_waiter/features/orders/models/order_complete_response.dart';
 import 'package:on_your_table_waiter/features/orders/models/order_product_model.dart';
@@ -70,7 +70,7 @@ class OrdersRepositoryImpl implements OrdersRepository {
       return Left(Failure(e.toString()));
     }
   }
-  
+
   @override
   Future<Either<Failure, List<UsersByTable>>> getUserByTable(String tableId) async {
     try {

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'package:on_your_table_waiter/core/wrappers/state_wrapper.dart';
+import 'package:oyt_front_core/wrappers/state_wrapper.dart';
 import 'package:on_your_table_waiter/features/orders_queue/models/orders_queue.dart';
 
 class OrdersQueueState extends Equatable {

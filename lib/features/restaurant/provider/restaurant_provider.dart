@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:on_your_table_waiter/core/failure/failure.dart';
-import 'package:on_your_table_waiter/core/wrappers/state_wrapper.dart';
+import 'package:oyt_front_core/failure/failure.dart';
+import 'package:oyt_front_core/wrappers/state_wrapper.dart';
 import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 import 'package:on_your_table_waiter/features/restaurant/provider/restaurant_state.dart';
 import 'package:on_your_table_waiter/features/restaurant/repositories/restaurant_repository.dart';

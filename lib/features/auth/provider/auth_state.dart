@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:on_your_table_waiter/core/wrappers/state_wrapper.dart';
+import 'package:oyt_front_core/wrappers/state_wrapper.dart';
 import 'package:on_your_table_waiter/features/auth/models/auth_model.dart';
 import 'package:on_your_table_waiter/features/auth/models/check_waiter_response.dart';
 

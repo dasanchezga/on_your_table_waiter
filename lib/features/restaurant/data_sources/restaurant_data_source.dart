@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:on_your_table_waiter/core/external/api_handler.dart';
-import 'package:on_your_table_waiter/core/logger/logger.dart';
+import 'package:oyt_front_core/external/api_handler.dart';
+import 'package:oyt_front_core/logger/logger.dart';
 import 'package:on_your_table_waiter/features/restaurant/models/restaurant_model.dart';
 
 final restaurantDataSourceProvider = Provider<RestaurantDataSource>((ref) {

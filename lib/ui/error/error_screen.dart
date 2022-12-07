@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
-import 'package:on_your_table_waiter/core/constants/lotti_assets.dart';
+import 'package:oyt_front_core/constants/lotti_assets.dart';
 import 'package:on_your_table_waiter/ui/widgets/backgrounds/animated_background.dart';
 import 'package:on_your_table_waiter/ui/widgets/buttons/custom_elevated_button.dart';
 
