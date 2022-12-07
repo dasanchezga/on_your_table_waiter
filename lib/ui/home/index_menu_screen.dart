@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:on_your_table_waiter/features/restaurant/provider/restaurant_provider.dart';
-import 'package:on_your_table_waiter/ui/menu/products_screen_tab.dart';
-import 'package:on_your_table_waiter/ui/menu/tables_screen_tab.dart';
-import 'package:on_your_table_waiter/ui/menu/menu_screen_tab.dart';
+import 'package:on_your_table_waiter/ui/home/products_screen_tab.dart';
+import 'package:on_your_table_waiter/ui/home/tables_screen_tab.dart';
+import 'package:on_your_table_waiter/ui/home/menu_screen_tab.dart';
 
 class IndexHomeScreen extends ConsumerStatefulWidget {
   const IndexHomeScreen({super.key});

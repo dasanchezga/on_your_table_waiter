@@ -5,7 +5,7 @@ import 'package:on_your_table_waiter/features/bill/bill_screen.dart';
 import 'package:on_your_table_waiter/features/product/models/product_model.dart';
 import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/ui/auth/login_screen.dart';
-import 'package:on_your_table_waiter/ui/menu/index_menu_screen.dart';
+import 'package:on_your_table_waiter/ui/home/index_menu_screen.dart';
 import 'package:on_your_table_waiter/ui/on_boarding/on_boarding.dart';
 import 'package:on_your_table_waiter/ui/products/product_detail.dart';
 import 'package:on_your_table_waiter/ui/table/table_detail_screen.dart';

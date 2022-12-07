@@ -1,4 +1,3 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,7 @@ import 'package:oyt_front_core/constants/lotti_assets.dart';
 import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 import 'package:on_your_table_waiter/ui/auth/login_screen.dart';
 import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
+import 'package:oyt_front_widgets/widgets/cards/on_boarding_animation_title.dart';
 import 'package:oyt_front_widgets/widgets/divider.dart';
 
 class OnBoarding extends ConsumerStatefulWidget {
@@ -29,33 +29,12 @@ class _OnBoardingState extends ConsumerState<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     final authState = ref.read(authProvider);
-    final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.white,
       body: authState.authModel.on(
         onError: (e) => SafeArea(
           child: Column(
             children: [
-              Lottie.asset(
-                LottieAssets.food,
-                width: size.width,
-                height: size.height * 0.44,
-              ),
-              const CustomDivider(),
-              AnimatedTextKit(
-                totalRepeatCount: 1,
-                animatedTexts: [
-                  TyperAnimatedText(
-                    'On Your Table',
-                    speed: const Duration(milliseconds: 100),
-                    textStyle: Theme.of(context).textTheme.headline4?.copyWith(
-                          fontSize: 40,
-                          fontWeight: FontWeight.w900,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                  ),
-                ],
-              ),
+              const OnboardingAnimationTitle(),
               const Padding(
                 padding: EdgeInsets.all(20),
                 child: Text(
@@ -83,26 +62,7 @@ class _OnBoardingState extends ConsumerState<OnBoarding> {
         onInitial: () => SafeArea(
           child: Column(
             children: [
-              Lottie.asset(
-                LottieAssets.food,
-                width: size.width,
-                height: size.height * 0.44,
-              ),
-              const CustomDivider(),
-              AnimatedTextKit(
-                totalRepeatCount: 1,
-                animatedTexts: [
-                  TyperAnimatedText(
-                    'On Your Table',
-                    speed: const Duration(milliseconds: 100),
-                    textStyle: Theme.of(context).textTheme.headline4?.copyWith(
-                          fontSize: 40,
-                          fontWeight: FontWeight.w900,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                  ),
-                ],
-              ),
+              const OnboardingAnimationTitle(),
               const Padding(
                 padding: EdgeInsets.all(20),
                 child: Text(

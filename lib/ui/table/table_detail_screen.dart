@@ -5,7 +5,7 @@ import 'package:on_your_table_waiter/ui/widgets/bottom_sheet/change_table_status
 import 'package:oyt_front_core/constants/lotti_assets.dart';
 import 'package:on_your_table_waiter/features/table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
-import 'package:on_your_table_waiter/ui/menu/widgets/table_user_card.dart';
+import 'package:on_your_table_waiter/ui/home/widgets/table_user_card.dart';
 import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
 
 class TableDetailScreen extends ConsumerStatefulWidget {

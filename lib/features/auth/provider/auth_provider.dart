@@ -11,7 +11,7 @@ import 'package:on_your_table_waiter/features/orders_queue/provider/orders_queue
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
 import 'package:on_your_table_waiter/features/user/models/user_model.dart';
 import 'package:oyt_front_widgets/error/error_screen.dart';
-import 'package:on_your_table_waiter/ui/menu/index_menu_screen.dart';
+import 'package:on_your_table_waiter/ui/home/index_menu_screen.dart';
 import 'package:on_your_table_waiter/ui/on_boarding/on_boarding.dart';
 
 final authProvider = StateNotifierProvider<AuthProvider, AuthState>((ref) {
