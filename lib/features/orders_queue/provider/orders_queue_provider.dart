@@ -3,8 +3,8 @@ import 'package:oyt_front_core/constants/socket_constants.dart';
 import 'package:oyt_front_core/external/socket_handler.dart';
 import 'package:oyt_front_core/failure/failure.dart';
 import 'package:oyt_front_core/wrappers/state_wrapper.dart';
-import 'package:on_your_table_waiter/features/orders_queue/models/orders_queue.dart';
 import 'package:on_your_table_waiter/features/orders_queue/provider/orders_queue_state.dart';
+import 'package:oyt_front_orders_queue/models/orders_queue.dart';
 
 final ordersQueueProvider = StateNotifierProvider<OrdersQueueNotifier, OrdersQueueState>((ref) {
   return OrdersQueueNotifier.fromRef(ref);
