@@ -1,36 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:oyt_front_widgets/bottom_sheet/bottom_sheet_constants.dart';
 import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
 import 'package:oyt_front_widgets/bottom_sheet/base_bottom_sheet.dart';
 import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 
-class UserInfoSheet extends ConsumerStatefulWidget {
+class UserInfoSheet extends ConsumerWidget {
   const UserInfoSheet({super.key});
 
-  static void show(BuildContext context) {
-    showModalBottomSheet(
+  static Future<void> show(BuildContext context) {
+    return showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius:
-            BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-      ),
+      shape: BottomSheetConstants.shape,
       isScrollControlled: true,
       builder: (context) => const UserInfoSheet(),
     );
   }
 
   @override
-  ConsumerState<UserInfoSheet> createState() => _UserInfoSheet();
-}
-
-class _UserInfoSheet extends ConsumerState<UserInfoSheet> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.read(authProvider);
     return BaseBottomSheet(
       child: Column(
@@ -46,9 +34,7 @@ class _UserInfoSheet extends ConsumerState<UserInfoSheet> {
                     '${data.user.firstName} ${data.user.lastName}',
                     style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  onError: (e) => Center(
-                    child: Text(e.message),
-                  ),
+                  onError: (e) => Center(child: Text(e.message)),
                   onInitial: () => const Center(child: CircularProgressIndicator()),
                   onLoading: () => const Center(child: CircularProgressIndicator()),
                 ),
@@ -59,7 +45,10 @@ class _UserInfoSheet extends ConsumerState<UserInfoSheet> {
           const SizedBox(height: 20),
           SizedBox(
             width: double.infinity,
-            child: CustomElevatedButton(onPressed: onLogout, child: const Text('Cerrar sesión')),
+            child: CustomElevatedButton(
+              onPressed: () => onLogout(ref),
+              child: const Text('Cerrar sesión'),
+            ),
           ),
           const SizedBox(height: 20),
         ],
@@ -67,7 +56,5 @@ class _UserInfoSheet extends ConsumerState<UserInfoSheet> {
     );
   }
 
-  void onLogout() {
-    ref.read(authProvider.notifier).logout();
-  }
+  void onLogout(WidgetRef ref) => ref.read(authProvider.notifier).logout();
 }

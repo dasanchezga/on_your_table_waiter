@@ -28,7 +28,7 @@ class _OnBoardingState extends ConsumerState<OnBoarding> {
 
   @override
   Widget build(BuildContext context) {
-    final authState = ref.read(authProvider);
+    final authState = ref.watch(authProvider);
     return Scaffold(
       body: authState.authModel.on(
         onLoading: () => Column(

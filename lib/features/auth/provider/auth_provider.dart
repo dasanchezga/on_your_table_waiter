@@ -94,7 +94,7 @@ class AuthProvider extends StateNotifier<AuthState> {
     }
     stopListeningSocket();
     Navigator.of(ref.read(routerProvider).context).popUntil((route) => route.isFirst);
-    Navigator.of(ref.read(routerProvider).context).pushReplacementNamed(OnBoarding.route);
+    ref.read(routerProvider).router.replace(OnBoarding.route);
     state = AuthState.initial();
   }
 
