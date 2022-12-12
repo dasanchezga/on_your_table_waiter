@@ -7,7 +7,6 @@ import 'package:on_your_table_waiter/features/table/ui/table_detail_screen.dart'
 import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 import 'package:on_your_table_waiter/widgets/bottom_sheet/user_info_sheet.dart';
 import 'package:oyt_front_widgets/loading/loading_widget.dart';
-import 'package:oyt_front_widgets/loading/screen_loading_widget.dart';
 
 class TablesScreenTab extends ConsumerStatefulWidget {
   const TablesScreenTab({super.key});
@@ -23,8 +22,8 @@ class _TablesScreenTab extends ConsumerState<TablesScreenTab> {
     final tableState = ref.watch(tableProvider);
     return tableState.tables.on(
       onError: (err) => Center(child: Text(err.message)),
-      onLoading: () => const ScreenLoadingWidget(),
-      onInitial: () => const ScreenLoadingWidget(),
+      onLoading: () => const LoadingWidget(),
+      onInitial: () => const LoadingWidget(),
       onData: (data) => SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
