@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oyt_front_widgets/bottom_sheet/bottom_sheet_constants.dart';
+import 'package:oyt_front_widgets/loading/loading_widget.dart';
 import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
 import 'package:oyt_front_widgets/bottom_sheet/base_bottom_sheet.dart';
 import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
@@ -35,8 +36,8 @@ class UserInfoSheet extends ConsumerWidget {
                     style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   onError: (e) => Center(child: Text(e.message)),
-                  onInitial: () => const Center(child: CircularProgressIndicator()),
-                  onLoading: () => const Center(child: CircularProgressIndicator()),
+                  onInitial: () => const LoadingWidget(),
+                  onLoading: () => const LoadingWidget(),
                 ),
               ),
               IconButton(onPressed: Navigator.of(context).pop, icon: const Icon(Icons.close)),

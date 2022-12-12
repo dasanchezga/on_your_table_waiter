@@ -204,7 +204,7 @@ packages:
       name: go_router
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.2.1"
+    version: "5.2.4"
   hive:
     dependency: transitive
     description:
@@ -314,6 +314,13 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/oyt_front_core"
+      relative: true
+    source: path
+    version: "0.0.1"
+  oyt_front_menu:
+    dependency: "direct main"
+    description:
+      path: "packages/oyt_front_menu"
       relative: true
     source: path
     version: "0.0.1"

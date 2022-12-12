@@ -10,6 +10,7 @@ import 'package:on_your_table_waiter/features/product/ui/topping_options_checkbo
 import 'package:on_your_table_waiter/widgets/bottom_sheet/add_product_to_table_sheet.dart';
 import 'package:oyt_front_widgets/bottom_sheet/base_bottom_sheet.dart';
 import 'package:oyt_front_widgets/error/error_screen.dart';
+import 'package:oyt_front_widgets/loading/screen_loading_widget.dart';
 import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
 import 'package:oyt_front_widgets/widgets/custom_text_field.dart';
 
@@ -73,8 +74,8 @@ class _ProductDetailState extends ConsumerState<ProductDetail> {
     return Scaffold(
       body: productState.productDetail.on(
         onError: (e) => ErrorScreen(error: e.message),
-        onLoading: () => const Center(child: CircularProgressIndicator()),
-        onInitial: () => const Center(child: CircularProgressIndicator()),
+        onLoading: () => const ScreenLoadingWidget(),
+        onInitial: () => const ScreenLoadingWidget(),
         onData: (data) {
           onCreateWidget(data);
           return NestedScrollView(

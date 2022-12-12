@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:oyt_front_core/constants/lotti_assets.dart';
 import 'package:oyt_front_core/validators/text_form_validator.dart';
 import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
+import 'package:oyt_front_widgets/loading/loading_widget.dart';
 import 'package:oyt_front_widgets/widgets/backgrounds/animated_background.dart';
 import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
 import 'package:oyt_front_widgets/widgets/custom_text_field.dart';
@@ -95,7 +96,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               onPressed: handleOnLogin,
               child: const Text('Ingresar'),
             ),
-            onLoading: () => const Center(child: CircularProgressIndicator()),
+            onLoading: () => const LoadingWidget(),
             onInitial: () => CustomElevatedButton(
               onPressed: handleOnLogin,
               child: const Text('Ingresar'),

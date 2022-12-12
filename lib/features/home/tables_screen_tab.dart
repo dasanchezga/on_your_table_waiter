@@ -6,6 +6,8 @@ import 'package:on_your_table_waiter/features/table/provider/table_provider.dart
 import 'package:on_your_table_waiter/features/table/ui/table_detail_screen.dart';
 import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 import 'package:on_your_table_waiter/widgets/bottom_sheet/user_info_sheet.dart';
+import 'package:oyt_front_widgets/loading/loading_widget.dart';
+import 'package:oyt_front_widgets/loading/screen_loading_widget.dart';
 
 class TablesScreenTab extends ConsumerStatefulWidget {
   const TablesScreenTab({super.key});
@@ -21,8 +23,8 @@ class _TablesScreenTab extends ConsumerState<TablesScreenTab> {
     final tableState = ref.watch(tableProvider);
     return tableState.tables.on(
       onError: (err) => Center(child: Text(err.message)),
-      onLoading: () => const Center(child: CircularProgressIndicator()),
-      onInitial: () => const Center(child: CircularProgressIndicator()),
+      onLoading: () => const ScreenLoadingWidget(),
+      onInitial: () => const ScreenLoadingWidget(),
       onData: (data) => SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -45,8 +47,8 @@ class _TablesScreenTab extends ConsumerState<TablesScreenTab> {
                     ),
                   ),
                   onError: (e) => Center(child: Text(e.message)),
-                  onInitial: () => const Center(child: CircularProgressIndicator()),
-                  onLoading: () => const Center(child: CircularProgressIndicator()),
+                  onInitial: () => const LoadingWidget(),
+                  onLoading: () => const LoadingWidget(),
                 )
               ],
             ),

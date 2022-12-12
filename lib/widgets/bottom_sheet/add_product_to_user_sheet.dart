@@ -6,6 +6,7 @@ import 'package:oyt_front_product/models/product_model.dart';
 import 'package:oyt_front_table/models/tables_socket_response.dart';
 import 'package:oyt_front_widgets/bottom_sheet/base_bottom_sheet.dart';
 import 'package:oyt_front_widgets/bottom_sheet/bottom_sheet_constants.dart';
+import 'package:oyt_front_widgets/loading/loading_widget.dart';
 import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
 
 class AddOrderToUserSheet extends ConsumerStatefulWidget {
@@ -62,8 +63,8 @@ class _AddOrderToUserState extends ConsumerState<AddOrderToUserSheet> {
           const Text('Selecciona el usuario al cual se agregue el producto:'),
           ordersState.usersByTable.on(
             onError: (error) => Text(error.toString()),
-            onLoading: () => const Center(child: CircularProgressIndicator()),
-            onInitial: () => const Center(child: CircularProgressIndicator()),
+            onLoading: () => const LoadingWidget(),
+            onInitial: () => const LoadingWidget(),
             onData: (data) => Column(
               children: data
                   .map(

@@ -6,6 +6,7 @@ import 'package:oyt_front_core/constants/lotti_assets.dart';
 import 'package:oyt_front_table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
 import 'package:on_your_table_waiter/features/home/widgets/table_user_card.dart';
+import 'package:oyt_front_widgets/loading/loading_widget.dart';
 import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
 
 class TableDetailScreen extends ConsumerStatefulWidget {
@@ -110,7 +111,7 @@ class _TableDetailScreenState extends ConsumerState<TableDetailScreen> {
             ],
           ),
           onError: (error) => Center(child: Text(error.message)),
-          onLoading: () => const Center(child: CircularProgressIndicator()),
+          onLoading: () => const LoadingWidget(),
           onInitial: () => const Center(child: Text('La mesa esta vacia.')),
         ),
       ),

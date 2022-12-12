@@ -5,6 +5,7 @@ import 'package:oyt_front_table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
 import 'package:on_your_table_waiter/widgets/bottom_sheet/add_product_to_user_sheet.dart';
 import 'package:oyt_front_widgets/bottom_sheet/base_bottom_sheet.dart';
+import 'package:oyt_front_widgets/loading/loading_widget.dart';
 import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
 
 class AddOrderToTableSheet extends ConsumerStatefulWidget {
@@ -54,7 +55,7 @@ class _AddOrderToTableState extends ConsumerState<AddOrderToTableSheet> {
           const Text('Selecciona la mesa al cual se agregue el producto:'),
           tableState.tables.on(
             onError: (error) => Text(error.toString()),
-            onLoading: () => const Center(child: CircularProgressIndicator()),
+            onLoading: () => const LoadingWidget(),
             onInitial: () => const SizedBox.shrink(),
             onData: (data) => Column(
               children: data.tables

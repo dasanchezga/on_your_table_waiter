@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:on_your_table_waiter/features/orders_queue/provider/orders_queue_provider.dart';
+import 'package:oyt_front_widgets/loading/loading_widget.dart';
 
 class ProductsMenuScreen extends ConsumerWidget {
   const ProductsMenuScreen({super.key});
@@ -17,7 +18,7 @@ class ProductsMenuScreen extends ConsumerWidget {
           const SizedBox(height: 20),
           ordersQueueState.ordersQueue.on(
             onError: (err) => Center(child: Text(err.message)),
-            onLoading: () => const Center(child: CircularProgressIndicator()),
+            onLoading: () => const LoadingWidget(),
             onInitial: () => const Center(child: Text('No hay productos en cola')),
             onData: (data) => data.isEmpty
                 ? const Center(child: Text('No hay productos en cola'))
