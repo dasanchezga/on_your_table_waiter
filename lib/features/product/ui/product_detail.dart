@@ -38,17 +38,7 @@ class _ProductDetailState extends ConsumerState<ProductDetail> {
   num totalWithToppings = 0;
   bool isCreated = false;
 
-  void scollListener() {
-    if (_scrollController.offset >= 100) {
-      setState(() {
-        isExpanded = false;
-      });
-    } else {
-      setState(() {
-        isExpanded = true;
-      });
-    }
-  }
+  void scollListener() => setState(() => isExpanded = _scrollController.offset >= 100);
 
   @override
   void initState() {
