@@ -1,3 +1,7 @@
+git submodule init
+git submodule update
+flutter pub get
+
 # on_your_table_waiter
 
 A new Flutter project.
