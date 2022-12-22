@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:oyt_front_widgets/cards/table_grid_card.dart';
 import 'package:go_router/go_router.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
 import 'package:on_your_table_waiter/features/table/ui/table_detail_screen.dart';
@@ -59,60 +59,14 @@ class _TablesScreenTab extends ConsumerState<TablesScreenTab> {
               itemCount: data.tables.length,
               shrinkWrap: true,
               primary: false,
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 3 / 2,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15,
-              ),
+              gridDelegate: TableGridCard.gridDelegate,
               itemBuilder: (context, index) {
                 final item = data.tables[index];
-                return Material(
-                  elevation: 2,
-                  shadowColor: Colors.grey.withOpacity(0.3),
-                  color: item.status.color,
-                  borderRadius: BorderRadius.circular(15),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(15),
-                    onTap: () => GoRouter.of(context).push(TableDetailScreen.route, extra: item),
-                    child: Stack(
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Mesa: ${item.name}',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 5, width: double.infinity),
-                            Text('${item.status.translatedValue}...'),
-                          ],
-                        ),
-                        if (tableState.customerRequests.data?.callingTables.contains(item.id) ??
-                            false)
-                          Positioned(
-                            top: 8,
-                            right: 8,
-                            child: Container(
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Icon(
-                                FontAwesomeIcons.bell,
-                                color: Colors.white,
-                                size: 15,
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
+                return TableGridCard(
+                  item: item,
+                  isCallingTable: tableState.customerRequests.data?.callingTables.contains(item.id) ?? false,
+                  onSelectTable: (item) =>
+                      GoRouter.of(context).push(TableDetailScreen.route, extra: item),
                 );
               },
             ),
