@@ -3,6 +3,14 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class CheckWaiterResponse extends Equatable {
+  factory CheckWaiterResponse.fromJson(String source) =>
+      CheckWaiterResponse.fromMap(json.decode(source));
+
+  factory CheckWaiterResponse.fromMap(Map<String, dynamic> map) {
+    return CheckWaiterResponse(
+      restaurantId: map['restaurantId'] ?? '',
+    );
+  }
   const CheckWaiterResponse({
     required this.restaurantId,
   });
@@ -23,16 +31,7 @@ class CheckWaiterResponse extends Equatable {
     };
   }
 
-  factory CheckWaiterResponse.fromMap(Map<String, dynamic> map) {
-    return CheckWaiterResponse(
-      restaurantId: map['restaurantId'] ?? '',
-    );
-  }
-
   String toJson() => json.encode(toMap());
-
-  factory CheckWaiterResponse.fromJson(String source) =>
-      CheckWaiterResponse.fromMap(json.decode(source));
 
   @override
   String toString() => 'CheckWaiterResponse(restaurantId: $restaurantId)';
@@ -40,3 +39,4 @@ class CheckWaiterResponse extends Equatable {
   @override
   List<Object> get props => [restaurantId];
 }
+
