@@ -64,7 +64,8 @@ class _TablesScreenTab extends ConsumerState<TablesScreenTab> {
                 final item = data.tables[index];
                 return TableGridCard(
                   item: item,
-                  isCallingTable: tableState.customerRequests.data?.callingTables.contains(item.id) ?? false,
+                  isCallingTable:
+                      tableState.customerRequests.data?.callingTables.contains(item.id) ?? false,
                   onSelectTable: (item) =>
                       GoRouter.of(context).push(TableDetailScreen.route, extra: item),
                 );

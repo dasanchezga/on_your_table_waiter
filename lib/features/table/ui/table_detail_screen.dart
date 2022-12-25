@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lottie/lottie.dart';
-import 'package:on_your_table_waiter/widgets/bottom_sheet/change_table_status_sheet.dart';
-import 'package:oyt_front_core/constants/lotti_assets.dart';
+import 'package:oyt_front_table/modals/change_table_status_sheet.dart';
 import 'package:oyt_front_table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
 import 'package:on_your_table_waiter/features/home/widgets/table_user_card.dart';
+import 'package:oyt_front_table/widgets/table_status_card.dart';
 import 'package:oyt_front_widgets/loading/loading_widget.dart';
 import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
 
@@ -46,43 +45,7 @@ class _TableDetailScreenState extends ConsumerState<TableDetailScreen> {
                 child: ListView(
                   padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 5,
-                            spreadRadius: 1,
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Lottie.asset(
-                            LottieAssets.ordering,
-                            width: 140,
-                          ),
-                          const SizedBox(width: 10),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Estado',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text('${data.tableStatus?.translatedValue}...'),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                    TableStatusCard(tableStatus: data.tableStatus),
                     const SizedBox(height: 10),
                     ListView.separated(
                       separatorBuilder: (context, index) => const Divider(),
@@ -118,5 +81,10 @@ class _TableDetailScreenState extends ConsumerState<TableDetailScreen> {
     );
   }
 
-  void onChangeStatus() => ChangeTableStatusSheet.show(context, widget.table);
+  void onChangeStatus() => ChangeTableStatusSheet.show(
+        context: context,
+        table: widget.table,
+        onTableStatusChanged: (status) =>
+            ref.read(tableProvider.notifier).changeStatus(status, widget.table),
+      );
 }
