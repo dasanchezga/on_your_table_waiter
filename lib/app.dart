@@ -1,19 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:on_your_table_waiter/core/router/router.dart';
+import 'package:oyt_front_core/push_notifications/push_notif_provider.dart';
 import 'package:oyt_front_core/theme/theme.dart';
 
-class MyApp extends ConsumerWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  final _messangerKey = GlobalKey<ScaffoldMessengerState>();
+
+  @override
+  void initState() {
+    final pushNotification = PushNotificationProvider(messengerKey: _messangerKey);
+    pushNotification.setupInteractedMessage();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final routerProv = ref.read(routerProvider);
     return MaterialApp.router(
+      scaffoldMessengerKey: _messangerKey,
       title: 'OYT - Waiter',
-      routeInformationProvider: routerProv.goRouter.routeInformationProvider,
-      routeInformationParser: routerProv.goRouter.routeInformationParser,
-      routerDelegate: routerProv.goRouter.routerDelegate,
+      routerConfig: routerProv.goRouter,
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.myTheme(),
     );
