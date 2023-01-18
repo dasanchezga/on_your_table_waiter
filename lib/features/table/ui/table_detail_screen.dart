@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:on_your_table_waiter/features/product/ui/product_detail.dart';
 import 'package:oyt_front_table/modals/change_table_status_sheet.dart';
 import 'package:oyt_front_table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
-import 'package:on_your_table_waiter/features/home/widgets/table_user_card.dart';
+import 'package:oyt_front_table/widgets/table_user_card.dart';
 import 'package:oyt_front_table/widgets/table_status_card.dart';
 import 'package:oyt_front_widgets/loading/loading_widget.dart';
 import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
+import 'package:go_router/go_router.dart';
 
 class TableDetailScreen extends ConsumerStatefulWidget {
   const TableDetailScreen({required this.table, super.key});
@@ -54,7 +56,16 @@ class _TableDetailScreenState extends ConsumerState<TableDetailScreen> {
                       itemCount: data.users.length,
                       itemBuilder: (context, index) {
                         final item = data.users[index];
-                        return TableUserCard(userTable: item, showPrice: true);
+                        return TableUserCard(
+                          userTable: item,
+                          showPrice: true,
+                          onEdit: (userTable, productDetail) {
+                            GoRouter.of(context).push(
+                              '${ProductDetail.route}?productId=${productDetail.id}',
+                              extra: productDetail,
+                            );
+                          },
+                        );
                       },
                     ),
                   ],
