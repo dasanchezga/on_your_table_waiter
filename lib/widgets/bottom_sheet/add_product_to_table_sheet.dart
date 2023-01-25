@@ -6,7 +6,6 @@ import 'package:on_your_table_waiter/features/table/provider/table_provider.dart
 import 'package:on_your_table_waiter/widgets/bottom_sheet/add_product_to_user_sheet.dart';
 import 'package:oyt_front_widgets/bottom_sheet/base_bottom_sheet.dart';
 import 'package:oyt_front_widgets/loading/loading_widget.dart';
-import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
 
 class AddOrderToTableSheet extends ConsumerStatefulWidget {
   const AddOrderToTableSheet({required this.product, super.key});
@@ -73,7 +72,7 @@ class _AddOrderToTableState extends ConsumerState<AddOrderToTableSheet> {
           ),
           SizedBox(
             width: double.infinity,
-            child: CustomElevatedButton(
+            child: FilledButton(
               onPressed: onAddProductToUser,
               child: const Text('Seleccionar usuario'),
             ),

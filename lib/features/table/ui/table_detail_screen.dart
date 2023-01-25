@@ -7,7 +7,7 @@ import 'package:on_your_table_waiter/features/table/provider/table_provider.dart
 import 'package:oyt_front_table/widgets/table_user_card.dart';
 import 'package:oyt_front_table/widgets/table_status_card.dart';
 import 'package:oyt_front_widgets/loading/loading_widget.dart';
-import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
+
 import 'package:go_router/go_router.dart';
 
 class TableDetailScreen extends ConsumerStatefulWidget {
@@ -71,7 +71,7 @@ class _TableDetailScreenState extends ConsumerState<TableDetailScreen> {
                   ],
                 ),
               ),
-              CustomElevatedButton(
+              FilledButton(
                 onPressed: onChangeStatus,
                 child: const Text('Cambiar estado de la mesa'),
               ),

@@ -11,7 +11,7 @@ import 'package:on_your_table_waiter/widgets/bottom_sheet/add_product_to_table_s
 import 'package:oyt_front_widgets/bottom_sheet/base_bottom_sheet.dart';
 import 'package:oyt_front_widgets/error/error_screen.dart';
 import 'package:oyt_front_widgets/loading/screen_loading_widget.dart';
-import 'package:oyt_front_widgets/widgets/buttons/custom_elevated_button.dart';
+
 import 'package:oyt_front_widgets/widgets/custom_text_field.dart';
 
 class ProductDetail extends ConsumerStatefulWidget {
@@ -136,13 +136,13 @@ class _ProductDetailState extends ConsumerState<ProductDetail> {
                 ),
                 const SizedBox(height: 20.0),
                 widget.order == null
-                    ? CustomElevatedButton(
+                    ? FilledButton(
                         onPressed: _onAddToOrder,
                         child: Text('Agregar \$ ${CurrencyFormatter.format(totalWithToppings)}'),
                       )
                     : Column(
                         children: [
-                          CustomElevatedButton(
+                          FilledButton(
                             onPressed: _modifyItem,
                             child: Text(
                               'Modificar orden \$ ${CurrencyFormatter.format(totalWithToppings)}',
