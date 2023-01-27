@@ -1,7 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:oyt_front_core/failure/failure.dart';
 import 'package:oyt_front_core/wrappers/state_wrapper.dart';
-import 'package:on_your_table_waiter/features/auth/provider/auth_provider.dart';
 import 'package:on_your_table_waiter/features/restaurant/provider/restaurant_state.dart';
 import 'package:oyt_front_restaurant/repositories/restaurant_repository.dart';
 
@@ -24,17 +22,8 @@ class RestaurantProvider extends StateNotifier<RestaurantState> {
   final RestaurantRepository restaurantRepository;
 
   Future<void> getMenu() async {
-    final waiterResponse = ref.read(authProvider).checkWaiterResponse.data;
-    if (waiterResponse == null) {
-      state = state.copyWith(
-        restaurant: StateAsync.error(
-          const Failure('Oops, ha ocurrido un error.'),
-        ),
-      );
-      return;
-    }
     state = state.copyWith(restaurant: StateAsync.loading());
-    final result = await restaurantRepository.getMenuByRestaurant(waiterResponse.restaurantId);
+    final result = await restaurantRepository.getMenuByRestaurant();
     result.fold(
       (failure) => state = state.copyWith(restaurant: StateAsync.error(failure)),
       (restaurant) => state = state.copyWith(restaurant: StateAsync.success(restaurant)),

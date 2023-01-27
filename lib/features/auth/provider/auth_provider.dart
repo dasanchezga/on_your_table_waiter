@@ -65,7 +65,10 @@ class AuthProvider extends StateNotifier<AuthState> {
     final res = await authRepository.checkIfIsWaiter();
     res.fold(
       (l) => ref.read(routerProvider).router.push(ErrorScreen.route, extra: {'error': l.message}),
-      (r) => state = state.copyWith(checkWaiterResponse: StateAsync.success(r)),
+      (r) async {
+        await authRepository.chooseRestaurantId(r.restaurantId);
+        state = state.copyWith(checkWaiterResponse: StateAsync.success(r));
+      },
     );
   }
 
