@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:on_your_table_waiter/features/event_bus/provider/event_bus_provider.dart';
 import 'package:oyt_front_auth/models/login_model.dart';
 import 'package:oyt_front_auth/models/user_model.dart';
 import 'package:oyt_front_core/external/socket_handler.dart';
@@ -136,6 +137,7 @@ class AuthProvider extends StateNotifier<AuthState> {
   Future<void> startListeningSocket() async {
     await socketIOHandler.connect();
     ref.read(tableProvider.notifier).startListeningSocket();
+    ref.read(eventBusProvider.notifier).startListeningSocket();
     ref.read(ordersQueueProvider.notifier).startListeningSocket();
   }
 }
