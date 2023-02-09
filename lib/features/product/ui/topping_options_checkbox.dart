@@ -21,7 +21,7 @@ class ToppingOptionsCheckbox extends StatefulWidget {
 
 class _ToppingOptionsCheckboxState extends State<ToppingOptionsCheckbox> {
   List<Topping> addedToppings = [];
-  List<Option> expandedToppings = [];
+  List<ToppingOption> expandedToppings = [];
 
   @override
   void initState() {
@@ -102,7 +102,7 @@ class _ToppingOptionsCheckboxState extends State<ToppingOptionsCheckbox> {
                           return Column(
                             children: [
                               const Divider(),
-                              RadioListTile<Option>(
+                              RadioListTile<ToppingOption>(
                                 contentPadding: EdgeInsets.zero,
                                 controlAffinity: ListTileControlAffinity.trailing,
                                 value: toppingOption,
