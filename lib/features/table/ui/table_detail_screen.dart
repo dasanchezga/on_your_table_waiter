@@ -4,6 +4,7 @@ import 'package:on_your_table_waiter/features/product/ui/product_detail.dart';
 import 'package:oyt_front_table/modals/change_table_status_sheet.dart';
 import 'package:oyt_front_table/models/tables_socket_response.dart';
 import 'package:on_your_table_waiter/features/table/provider/table_provider.dart';
+import 'package:oyt_front_table/models/users_table.dart';
 import 'package:oyt_front_table/widgets/table_user_card.dart';
 import 'package:oyt_front_table/widgets/table_status_card.dart';
 import 'package:oyt_front_widgets/loading/loading_widget.dart';
@@ -72,7 +73,7 @@ class _TableDetailScreenState extends ConsumerState<TableDetailScreen> {
                 ),
               ),
               FilledButton(
-                onPressed: onChangeStatus,
+                onPressed: () => onChangeStatus(data),
                 child: const Text('Cambiar estado de la mesa'),
               ),
               if (data.needsWaiter)
@@ -92,9 +93,10 @@ class _TableDetailScreenState extends ConsumerState<TableDetailScreen> {
     );
   }
 
-  void onChangeStatus() => ChangeTableStatusSheet.show(
+  void onChangeStatus(UsersTable usersTable) => ChangeTableStatusSheet.show(
         context: context,
         table: widget.table,
+        usersTable: usersTable,
         onTableStatusChanged: (status) =>
             ref.read(tableProvider.notifier).changeStatus(status, widget.table),
       );
