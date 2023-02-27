@@ -21,8 +21,8 @@ class RestaurantProvider extends StateNotifier<RestaurantState> {
   final Ref ref;
   final RestaurantRepository restaurantRepository;
 
-  Future<void> getMenu() async {
-    state = state.copyWith(restaurant: StateAsync.loading());
+  Future<void> getMenu({bool silent = false}) async {
+    if (!silent) state = state.copyWith(restaurant: StateAsync.loading());
     final result = await restaurantRepository.getMenuByRestaurant();
     result.fold(
       (failure) => state = state.copyWith(restaurant: StateAsync.error(failure)),
