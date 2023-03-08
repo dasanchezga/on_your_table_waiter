@@ -18,7 +18,6 @@ class AddOrderToUserSheet extends ConsumerStatefulWidget {
     return showModalBottomSheet(
       context: context,
       shape: BottomSheetConstants.shape,
-      isScrollControlled: true,
       builder: (context) => AddOrderToUserSheet(table: table, product: product),
     );
   }
@@ -42,22 +41,9 @@ class _AddOrderToUserState extends ConsumerState<AddOrderToUserSheet> {
   Widget build(BuildContext context) {
     final ordersState = ref.watch(ordersProvider);
     return BaseBottomSheet(
+      title: 'Agregar producto',
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Flexible(
-                child: Text(
-                  'Añadir producto a mesa ',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-              IconButton(onPressed: Navigator.of(context).pop, icon: const Icon(Icons.close))
-            ],
-          ),
           const SizedBox(height: 10),
           const Text('Selecciona el usuario al cual se agregue el producto:'),
           ordersState.usersByTable.on(
