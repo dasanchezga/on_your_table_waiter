@@ -35,21 +35,9 @@ class _AddOrderToTableState extends ConsumerState<AddOrderToTableSheet> {
   Widget build(BuildContext context) {
     final tableState = ref.watch(tableProvider);
     return BaseBottomSheet(
-      child: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 40),
+      title: 'Añadir producto a mesa ',
+      child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Flexible(
-                child: Text(
-                  'Añadir producto a mesa ',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-              IconButton(onPressed: Navigator.of(context).pop, icon: const Icon(Icons.close))
-            ],
-          ),
           const SizedBox(height: 10),
           const Text('Selecciona la mesa al cual se agregue el producto:'),
           tableState.tables.on(

@@ -199,10 +199,10 @@ class _ProductDetailState extends ConsumerState<ProductDetail> {
       context: context,
       builder: (BuildContext context) {
         return BaseBottomSheet(
+          title: '¿Estás seguro que deseas elimnar este plato de la orden?',
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('¿Estás seguro que deseas elimnar este plato de la orden?'),
               const SizedBox(
                 height: 10,
               ),
@@ -210,9 +210,7 @@ class _ProductDetailState extends ConsumerState<ProductDetail> {
                 onPressed: _deleteItem,
                 child: const Text('Sí'),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: Navigator.of(context).pop,
                 child: const Text('No'),
